@@ -2,6 +2,8 @@
 
 This standard governs material published from the MidnightLabs environment. Its purpose is to preserve useful technical evidence without exposing operational access, private infrastructure details, or other people's information.
 
+Public-facing interpretation must also pass the [MidnightLabs Voice and Authorship Standard](./VOICE-STANDARD.md).
+
 ## Never publish
 
 - Passwords, passphrases, API tokens, cookies, private keys, recovery codes, or VPN material
@@ -44,5 +46,6 @@ Before merging infrastructure documentation into `main`:
 5. Verify links and filenames.
 6. State the artifact's status and date.
 7. Preserve the reason, outcome, failure, and lesson—not merely the final configuration.
+8. Pass public-facing interpretation through the Authorship Gate in `VOICE-STANDARD.md`.
 
 If sanitization would destroy the value of the evidence, keep the artifact private.
