@@ -2,7 +2,7 @@
 
 **A living record of cybersecurity, infrastructure building, and proof-of-work learning.**
 
-> "We're not chasing credentials—we're building capability."
+> "You'll know us by the lab light."
 
 MidnightLabs connects formal cybersecurity education, hands-on systems work, and clear documentation. The repository began in 2025 as a lab journal for networking fundamentals, Packet Tracer, Windows Server, and Active Directory. It now serves as the foundation for a larger locally controlled home-lab ecosystem.
 
