@@ -1,15 +1,20 @@
-# Ransomware Simulation – Drill 1
+# Ransomware Simulation — Drill 1
 
-**Date:** [Insert Date]
+> **Status:** Planned exercise — not executed  
+> **Origin:** Foundation Era, May 2025
 
-**Objective:** Simulate ransomware infection and analyze logs.
+This file was originally created as a drill template. The repository does not contain sufficient evidence that a ransomware simulation was performed, so the earlier placeholder steps have been removed.
 
----
+Any future exercise must use a controlled, isolated environment and a benign simulator or otherwise authorized training mechanism.
 
-## Steps
+## Proposed evidence requirements
 
-1. Executed payload on test machine
-2. Observed system behavior and logs
-
-## Findings
-- [Add findings here]
+- Written objective and authorization boundary
+- Isolated environment and rollback snapshot
+- Safe simulation method
+- Expected telemetry
+- Observed host and network logs
+- Detection and alerting results
+- Containment steps
+- Recovery verification
+- Lessons learned

@@ -42,7 +42,7 @@ The first MidnightLabs build cycle focused on network fundamentals and a small s
 - PowerShell user-provisioning experiments
 - Kali Linux prepared for future security exercises
 
-Start with [Domain Dawn — From VM Chaos to Order](./Lab-journal/Entry1-InitialSetup.md).
+Start with the [Foundation Era index](./FOUNDATION-ERA.md) or [Domain Dawn — From VM Chaos to Order](./Lab-journal/Entry1-InitialSetup.md).
 
 ### Networking foundations
 
@@ -92,6 +92,8 @@ Files under [configs](./configs/) and [incidents](./incidents/) currently includ
 Public documentation is sanitized before publication. Real credentials, VPN material, public addresses, serial numbers, and sensitive management details do not belong in this repository.
 
 Some Foundation Era screenshots contain intentionally disposable training credentials or private lab addressing. These are historical simulation artifacts and must never be reused as operational credentials.
+
+See the [MidnightLabs Public Documentation Standard](./PUBLICATION-STANDARD.md) for the sanitization and evidence rules used before material reaches `main`.
 
 ---
 
