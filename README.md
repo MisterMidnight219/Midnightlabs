@@ -67,6 +67,7 @@ MidnightLabs is designed to capture more than completed configurations. Each sub
 5. How did we recover?
 6. What changed in our operating doctrine?
 7. What evidence supports the result?
+8. Can another person reproduce, control, or benefit from it?
 
 That structure turns individual labs into a record of systems thinking.
 
@@ -87,13 +88,14 @@ Files under [configs](./configs/) and [incidents](./incidents/) currently includ
 
 ---
 
-## Documentation and Security
+## Documentation, Security, and Authorship
 
 Public documentation is sanitized before publication. Real credentials, VPN material, public addresses, serial numbers, and sensitive management details do not belong in this repository.
 
 Some Foundation Era screenshots contain intentionally disposable training credentials or private lab addressing. These are historical simulation artifacts and must never be reused as operational credentials.
 
-See the [MidnightLabs Public Documentation Standard](./PUBLICATION-STANDARD.md) for the sanitization and evidence rules used before material reaches `main`.
+- [MidnightLabs Public Documentation Standard](./PUBLICATION-STANDARD.md)
+- [MidnightLabs Voice and Authorship Standard](./VOICE-STANDARD.md)
 
 ---
 
@@ -108,6 +110,8 @@ The current lab is guided by a growing set of principles:
 - **Protect the management lifeline** — administrative access should survive ordinary mistakes.
 - **Persistent memory before intelligence** — logging and provenance precede agentic action.
 - **Human approval for consequential actions** — automation should not outrun accountability.
+- **Preserve authorship** — augment the builder's voice without replacing their judgment.
+- **Build for transfer** — ask whether the work can increase someone else's control over technology.
 
 Read the original [Midnight Manifesto](./Manifesto.md) for the philosophy that started the project.
 
