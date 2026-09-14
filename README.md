@@ -12,13 +12,15 @@ The early work remains here deliberately. It shows the starting point, the mista
 
 ## Current Direction
 
-MidnightLabs is evolving from isolated classroom labs into a persistent systems environment built around four roles:
+MidnightLabs is evolving from isolated classroom labs into a persistent systems environment built around six roles:
 
 | System | Role | Status |
 |---|---|---|
 | **Midgar** | OPNsense gateway, routing, segmentation, and policy enforcement | Active development |
 | **Ellie** | Proxmox compute and virtualization host | Active development |
 | **Index Prime** | TrueNAS/ZFS persistence, storage, and planned centralized log retention | Active development |
+| **The Observatory** | Independent telemetry, detection, and change-verification layer | Active development |
+| **The Bridge** | Planned approval-gated infrastructure change plane | [Architecture formalized](./architecture/BRIDGE.md) |
 | **AIDA** | Planned investigation and orchestration layer with human-approved actions | Research and architecture |
 
 The operating principle is simple:
@@ -80,7 +82,8 @@ That structure turns individual labs into a record of systems thinking.
 | Foundation networking labs | Journal entries and screenshots | Complete historical series |
 | EnterpriseSim v1 | AD, DNS, DHCP, client onboarding, and PowerShell screenshots | Foundation build documented |
 | Midgar | Documentation package in preparation | Active development |
-| Centralized observability | Architecture and persistence design in progress | Active development |
+| The Observatory | Architecture, telemetry, and persistence design in progress | Active development |
+| [The Bridge](./architecture/BRIDGE.md) | Public architecture, safety boundaries, adapter model, and phased plan | Planned |
 | Red/blue simulations | Placeholder exercises retained for future development | Planned |
 | AIDA | Security boundaries and architecture under research | Planned |
 
