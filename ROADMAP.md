@@ -13,10 +13,16 @@ The lab is being rebuilt and documented through a staged lifecycle:
 3. **Credential Management** — formalize identity, secrets, MFA, and recovery practices.
 4. **Fortify** — harden hosts, networks, management surfaces, applications, and trust.
 5. **Observe** — centralize useful telemetry, detection, dashboards, and investigation workflows.
-6. **Controlled Automation** — develop narrow, auditable tooling with human approval for state-changing actions.
+6. **Controlled Automation** — develop [the Bridge](./architecture/BRIDGE.md) as narrow, auditable tooling with human approval for state-changing actions.
 7. **Services** — rebuild applications on the hardened and recoverable platform.
 8. **Validation** — test segmentation, recovery, detection, credentials, and operational assumptions.
 9. **Edge Readiness** — promote the environment only after the preceding controls have been demonstrated.
+
+## Controlled Automation Direction
+
+The Bridge is the planned change plane between verified intelligence and infrastructure action. It will begin with read-only inventory and applicability checks, advance through recovery-aware preparation, and permit state-changing operations only through restricted platform adapters, explicit authorization, canary execution, independent Observatory verification, and recorded rollback evidence.
+
+AIDA may interpret evidence and propose plans. The Bridge executes only authorized named operations. The Observatory independently evaluates the result.
 
 ## Publication Boundary
 
