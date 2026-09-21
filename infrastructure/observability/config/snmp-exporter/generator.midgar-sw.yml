@@ -1,0 +1,24 @@
+modules:
+  midgar_sw_lldp:
+    walk:
+      - 1.0.8802.1.1.2
+
+  midgar_sw_bridge:
+    walk:
+      - 1.3.6.1.2.1.17
+
+  midgar_sw_qbridge:
+    walk:
+      - 1.3.6.1.2.1.17.7
+
+  midgar_sw_poe:
+    walk:
+      - 1.3.6.1.2.1.105
+
+  midgar_sw_entity:
+    walk:
+      - 1.3.6.1.2.1.47
+
+  midgar_sw_entity_sensor:
+    walk:
+      - 1.3.6.1.2.1.99

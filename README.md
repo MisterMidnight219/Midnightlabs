@@ -19,6 +19,7 @@ MidnightLabs is evolving from isolated classroom labs into a persistent systems 
 | **Midgar** | OPNsense gateway, routing, segmentation, and policy enforcement | Active development |
 | **Ellie** | Proxmox compute and virtualization host | Active development |
 | **Index Prime** | TrueNAS/ZFS persistence, storage, and planned centralized log retention | Active development |
+| **Observatory** | Central metrics, logs, policy evaluation, recovery evidence, and dashboards | Operational baseline documented |
 | **AIDA** | Planned investigation and orchestration layer with human-approved actions | Research and architecture |
 
 The operating principle is simple:
@@ -80,7 +81,7 @@ That structure turns individual labs into a record of systems thinking.
 | Foundation networking labs | Journal entries and screenshots | Complete historical series |
 | EnterpriseSim v1 | AD, DNS, DHCP, client onboarding, and PowerShell screenshots | Foundation build documented |
 | Midgar | Documentation package in preparation | Active development |
-| Centralized observability | Architecture and persistence design in progress | Active development |
+| [Centralized observability](./infrastructure/observability/) | Sanitized central configuration, source matrix, audit, HA app, rules, and dashboard | Operational baseline documented |
 | Red/blue simulations | Placeholder exercises retained for future development | Planned |
 | AIDA | Security boundaries and architecture under research | Planned |
 

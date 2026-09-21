@@ -1,0 +1,23 @@
+---
+version: "0.1.2"
+slug: midnightlabs_ha_observability
+name: MidnightLabs HA Observability
+description: Read-only Home Assistant platform metrics and Core log forwarding
+url: https://github.com/MisterMidnight219/Midnightlabs/tree/main/infrastructure/observability
+arch:
+  - amd64
+startup: services
+boot: auto
+init: false
+hassio_api: true
+hassio_role: manager
+ports:
+  9101/tcp: 9101
+ports_description:
+  9101/tcp: Prometheus metrics
+options:
+  loki_url: http://observatory.example.internal:3100/loki/api/v1/push
+  poll_interval: 30
+schema:
+  loki_url: url
+  poll_interval: int(10,300)

@@ -1,0 +1,286 @@
+groups:
+  - name: midnightlabs-source-recording
+    interval: 30s
+    rules:
+      - record: midnightlabs:ha:updates_available
+        expr: sum(midnightlabs_ha_component_update_available)
+
+      - record: midnightlabs:ha:recovery_backup_age_hours
+        expr: (time() - midnightlabs_ha_recovery_backup_latest_timestamp_seconds) / 3600
+
+      - record: midnightlabs:unifi:backup_age_hours
+        expr: (time() - midnightlabs_unifi_backup_latest_timestamp_seconds) / 3600
+
+      - record: midnightlabs:pve:backup_age_hours
+        expr: (time() - midnightlabs_pve_backup_artifact_timestamp_seconds) / 3600
+
+  - name: midnightlabs-source-alerts
+    interval: 15s
+    rules:
+      - alert: MidnightLabsPVEGuestStateMismatch
+        expr: midnightlabs_pve_guest_state_matches_expectation == 0
+        for: 2m
+        labels:
+          severity: critical
+          domain: compute
+        annotations:
+          summary: "Proxmox guest {{ $labels.vmid }} violates its expected state"
+          description: "Guest {{ $labels.name }} on {{ $labels.node }} does not match the declared expected power state."
+
+      - alert: MidnightLabsPVEBackupJobDisabled
+        expr: midnightlabs_pve_backup_job_enabled == 0
+        for: 10m
+        labels:
+          severity: critical
+          domain: recovery
+        annotations:
+          summary: "Proxmox backup job is disabled"
+          description: "Backup job {{ $labels.job_id }} on {{ $labels.node }} is disabled."
+
+      - alert: MidnightLabsPVEBackupTaskFailed
+        expr: midnightlabs_pve_backup_last_task_success == 0
+        for: 5m
+        labels:
+          severity: critical
+          domain: recovery
+        annotations:
+          summary: "Latest Proxmox backup task failed"
+          description: "The most recently observed backup task on {{ $labels.node }} was unsuccessful."
+
+      - alert: MidnightLabsPVEBackupArtifactMissing
+        expr: midnightlabs_pve_backup_artifact_present == 0
+        for: 10m
+        labels:
+          severity: critical
+          domain: recovery
+        annotations:
+          summary: "Required Proxmox backup artifact is missing"
+          description: "No expected backup artifact is present for VM/CT {{ $labels.vmid }} ({{ $labels.name }})."
+
+      - alert: MidnightLabsPVEBackupArtifactStale
+        expr: time() - midnightlabs_pve_backup_artifact_timestamp_seconds > 36 * 3600
+        for: 30m
+        labels:
+          severity: warning
+          domain: recovery
+        annotations:
+          summary: "Proxmox backup artifact is stale"
+          description: "VM/CT {{ $labels.vmid }} ({{ $labels.name }}) has no backup artifact newer than 36 hours."
+
+      - alert: MidnightLabsHACoreSupervisorUnhealthy
+        expr: midnightlabs_ha_supervisor_healthy == 0
+        for: 5m
+        labels:
+          severity: critical
+          domain: home-automation
+        annotations:
+          summary: "Home Assistant Supervisor is unhealthy"
+          description: "HA Supervisor reports an unhealthy state on {{ $labels.node }}."
+
+      - alert: MidnightLabsHACoreUnsupported
+        expr: midnightlabs_ha_supervisor_supported == 0
+        for: 10m
+        labels:
+          severity: warning
+          domain: home-automation
+        annotations:
+          summary: "Home Assistant installation is unsupported"
+          description: "HA Supervisor reports the installation as unsupported."
+
+      - alert: MidnightLabsHACoreLogDeliveryFailed
+        expr: midnightlabs_ha_log_delivery_success == 0
+        for: 5m
+        labels:
+          severity: warning
+          domain: telemetry
+        annotations:
+          summary: "Home Assistant log delivery failed"
+          description: "The HA observability app cannot deliver Core logs to Loki."
+
+      - alert: MidnightLabsHACoreLogsDropped
+        expr: increase(midnightlabs_ha_log_lines_dropped_total[15m]) > 0
+        labels:
+          severity: warning
+          domain: telemetry
+        annotations:
+          summary: "Home Assistant log lines were dropped"
+          description: "The HA observability app dropped log lines during the last 15 minutes."
+
+      - alert: MidnightLabsHACoreLogPushFailures
+        expr: increase(midnightlabs_ha_log_push_failures_total[15m]) > 0
+        labels:
+          severity: warning
+          domain: telemetry
+        annotations:
+          summary: "Home Assistant log pushes are failing"
+          description: "One or more Loki push attempts failed during the last 15 minutes."
+
+      - alert: MidnightLabsHARecoveryBackupMissing
+        expr: midnightlabs_ha_recovery_backup_present == 0
+        for: 10m
+        labels:
+          severity: critical
+          domain: recovery
+        annotations:
+          summary: "No recovery-capable Home Assistant backup is present"
+          description: "HA Supervisor reports no recovery-capable backup containing Home Assistant."
+
+      - alert: MidnightLabsHARecoveryBackupStale
+        expr: time() - midnightlabs_ha_recovery_backup_latest_timestamp_seconds > 7 * 24 * 3600
+        for: 30m
+        labels:
+          severity: warning
+          domain: recovery
+        annotations:
+          summary: "Home Assistant recovery backup is older than seven days"
+          description: "The latest recovery-capable Home Assistant backup is {{ $value | humanizeDuration }} old."
+
+      - alert: MidnightLabsHARecoveryBackupUnprotected
+        expr: midnightlabs_ha_recovery_backup_latest_protected == 0
+        for: 1h
+        labels:
+          severity: warning
+          domain: recovery
+        annotations:
+          summary: "Latest Home Assistant recovery backup is unprotected"
+          description: "The latest recovery-capable HA backup is not password protected."
+
+      - alert: MidnightLabsUniFiServiceDown
+        expr: midnightlabs_unifi_service_active == 0
+        for: 5m
+        labels:
+          severity: critical
+          domain: network-control
+        annotations:
+          summary: "UniFi Network service is inactive"
+          description: "The UniFi controller service is not active on {{ $labels.node }}."
+
+      - alert: MidnightLabsUniFiDependencyDown
+        expr: midnightlabs_unifi_dependency_listener_active == 0
+        for: 5m
+        labels:
+          severity: critical
+          domain: network-control
+        annotations:
+          summary: "UniFi dependency listener is unavailable"
+          description: "UniFi dependency {{ $labels.dependency }} on port {{ $labels.port }} is not listening."
+
+      - alert: MidnightLabsUniFiHTTPSUnreachable
+        expr: midnightlabs_unifi_https_reachable == 0
+        for: 5m
+        labels:
+          severity: critical
+          domain: network-control
+        annotations:
+          summary: "UniFi HTTPS endpoint is unreachable"
+          description: "The UniFi application endpoint on port {{ $labels.port }} is not responding."
+
+      - alert: MidnightLabsUniFiBackupMissing
+        expr: midnightlabs_unifi_backup_present{kind="autobackup"} == 0
+        for: 10m
+        labels:
+          severity: critical
+          domain: recovery
+        annotations:
+          summary: "UniFi autobackup is missing"
+          description: "The controller has no native autobackup artifact."
+
+      - alert: MidnightLabsUniFiBackupStale
+        expr: time() - midnightlabs_unifi_backup_latest_timestamp_seconds{kind="autobackup"} > 36 * 3600
+        for: 30m
+        labels:
+          severity: warning
+          domain: recovery
+        annotations:
+          summary: "UniFi autobackup is stale"
+          description: "The latest UniFi autobackup is older than 36 hours."
+
+      - alert: MidnightLabsDomesticOpsServiceDown
+        expr: midnightlabs_domestic_ops_service_active == 0
+        for: 2m
+        labels:
+          severity: critical
+          domain: household-operations
+        annotations:
+          summary: "Domestic-Ops critical service is inactive"
+          description: "Systemd unit {{ $labels.unit }} is inactive on {{ $labels.node }}."
+
+      - alert: MidnightLabsDomesticOpsContainerDown
+        expr: midnightlabs_domestic_ops_container_running == 0
+        for: 2m
+        labels:
+          severity: critical
+          domain: household-operations
+        annotations:
+          summary: "Domestic-Ops container is not running"
+          description: "Container {{ $labels.container }} is not running."
+
+      - alert: MidnightLabsDomesticOpsHTTPUnresponsive
+        expr: midnightlabs_domestic_ops_http_responsive == 0
+        for: 5m
+        labels:
+          severity: warning
+          domain: household-operations
+        annotations:
+          summary: "Domestic-Ops application is unresponsive"
+          description: "{{ $labels.application }} on port {{ $labels.port }} is not returning HTTP 2xx or 3xx."
+
+      - alert: MidnightLabsDomesticOpsRecoverySourceMissing
+        expr: midnightlabs_domestic_ops_recovery_source_present == 0
+        for: 10m
+        labels:
+          severity: critical
+          domain: recovery
+        annotations:
+          summary: "Domestic-Ops recovery source is missing"
+          description: "Required recovery source {{ $labels.source }} is absent."
+
+      - alert: MidnightLabsSwitchInputErrors
+        expr: sum by (instance, node) (increase(ifInErrors{node="midgar-sw"}[15m])) > 0
+        labels:
+          severity: warning
+          domain: switching
+        annotations:
+          summary: "Midgar-SW received interface errors"
+          description: "{{ $value }} input errors were observed during the last 15 minutes."
+
+      - alert: MidnightLabsSwitchOutputErrors
+        expr: sum by (instance, node) (increase(ifOutErrors{node="midgar-sw"}[15m])) > 0
+        labels:
+          severity: warning
+          domain: switching
+        annotations:
+          summary: "Midgar-SW generated interface errors"
+          description: "{{ $value }} output errors were observed during the last 15 minutes."
+
+      - alert: MidnightLabsSwitchDiscardBurst
+        expr: |
+          (
+            sum by (instance, node) (increase(ifInDiscards{node="midgar-sw"}[15m]))
+            +
+            sum by (instance, node) (increase(ifOutDiscards{node="midgar-sw"}[15m]))
+          ) > 100
+        labels:
+          severity: warning
+          domain: switching
+        annotations:
+          summary: "Midgar-SW experienced a discard burst"
+          description: "{{ $value }} packets were discarded during the last 15 minutes."
+
+      - alert: MidnightLabsSwitchTopologyChanged
+        expr: increase(dot1dStpTopChanges{node="midgar-sw"}[15m]) > 0
+        labels:
+          severity: warning
+          domain: switching
+        annotations:
+          summary: "Midgar-SW spanning-tree topology changed"
+          description: "An STP topology change was recorded during the last 15 minutes."
+
+      - alert: MidnightLabsSwitchSNMPRetries
+        expr: increase(snmp_scrape_packets_retried{node="midgar-sw"}[15m]) > 0
+        labels:
+          severity: warning
+          domain: telemetry
+        annotations:
+          summary: "Midgar-SW SNMP transport required retries"
+          description: "The SNMP exporter retried packets while scraping the switch."

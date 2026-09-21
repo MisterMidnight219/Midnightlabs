@@ -1,0 +1,107 @@
+logging {
+  level  = "info"
+  format = "logfmt"
+}
+
+loki.relabel "journal" {
+  forward_to = []
+
+  rule {
+    source_labels = ["__journal__systemd_unit"]
+    target_label  = "unit"
+  }
+
+  rule {
+    source_labels = ["__journal_priority_keyword"]
+    target_label  = "level"
+  }
+
+  rule {
+    source_labels = ["__journal_syslog_identifier"]
+    target_label  = "syslog_identifier"
+  }
+}
+
+loki.source.journal "observatory" {
+  path          = "/var/log/journal"
+  max_age       = "24h"
+  forward_to    = [loki.write.local.receiver]
+  relabel_rules = loki.relabel.journal.rules
+
+  labels = {
+    host   = "observatory",
+    node   = "observatory",
+    site   = "midnightlabs",
+    role   = "observability",
+    service = "systemd-journal",
+    environment = "production",
+    source = "journald",
+  }
+}
+
+loki.write "local" {
+  endpoint {
+    url = "http://loki:3100/loki/api/v1/push"
+  }
+}
+
+loki.source.syslog "index" {
+  listener {
+    address  = "0.0.0.0:1514"
+    protocol = "tcp"
+
+    labels = {
+      host        = "index",
+      node        = "index",
+      site        = "midnightlabs",
+      role        = "storage",
+      service     = "truenas",
+      environment = "production",
+      vlan        = "STORAGE",
+      source      = "syslog",
+    }
+  }
+
+  forward_to = [loki.write.local.receiver]
+}
+
+loki.source.syslog "midgar" {
+  listener {
+    address  = "0.0.0.0:1515"
+    protocol = "tcp"
+
+    labels = {
+      host        = "midgar",
+      node        = "midgar",
+      site        = "midnightlabs",
+      role        = "firewall",
+      service     = "opnsense",
+      environment = "production",
+      vlan        = "OBSERVABILITY",
+      source      = "syslog",
+    }
+  }
+
+  forward_to = [loki.write.local.receiver]
+}
+
+loki.source.syslog "midgar_sw" {
+  listener {
+    address  = "0.0.0.0:1516"
+    syslog_format = "rfc3164"
+    protocol = "udp"
+
+    labels = {
+      host        = "midgar-sw",
+      node        = "midgar-sw",
+      site        = "midnightlabs",
+      role        = "switching",
+      service     = "arubaos-switch",
+      environment = "production",
+      vlan        = "MANAGEMENT",
+      source      = "syslog",
+    }
+  }
+
+  forward_to = [loki.write.local.receiver]
+}
