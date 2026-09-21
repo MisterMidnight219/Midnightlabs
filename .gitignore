@@ -4,3 +4,17 @@ screenshots/Logs/ShareX-Log-2025-05.txt
 *.txt
 screenshots/LabScreenshot0531luffy.jpg
 screenshots/explorer_RlVgqIcpVc.jpg
+
+# Observatory: permit the reviewed provisioned dashboard while retaining the
+# repository's broad historical JSON exclusion.
+!infrastructure/observability/config/grafana/provisioning/dashboards-json/midnightlabs-fleet-overview.json
+
+# Never publish Observatory runtime state or secret material.
+infrastructure/observability/.env
+infrastructure/observability/data/
+infrastructure/observability/secrets/
+infrastructure/observability/**/*.pre-*
+infrastructure/observability/**/*.backup-*
+infrastructure/observability/**/*.bak
+infrastructure/observability/**/__pycache__/
+infrastructure/observability/**/*.pyc

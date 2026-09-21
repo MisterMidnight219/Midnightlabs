@@ -1,0 +1,282 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - /etc/prometheus/rules/*.yml
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - prometheus:9090
+        labels:
+          site: midnightlabs
+          node: observatory
+          role: observability
+          service: prometheus
+          environment: production
+          vlan: OBSERVABILITY
+
+  - job_name: observatory
+    static_configs:
+      - targets:
+          - node-exporter:9100
+        labels:
+          site: midnightlabs
+          node: observatory
+          role: observability
+          service: node-exporter
+          environment: production
+          vlan: OBSERVABILITY
+
+  - job_name: grafana
+    static_configs:
+      - targets:
+          - grafana:3000
+        labels:
+          site: midnightlabs
+          node: observatory
+          role: visualization
+          service: grafana
+          environment: production
+          vlan: OBSERVABILITY
+
+  - job_name: loki
+    static_configs:
+      - targets:
+          - loki:3100
+        labels:
+          site: midnightlabs
+          node: observatory
+          role: log-storage
+          service: loki
+          environment: production
+          vlan: OBSERVABILITY
+
+  - job_name: alloy
+    static_configs:
+      - targets:
+          - alloy:12345
+        labels:
+          site: midnightlabs
+          node: observatory
+          role: telemetry-collector
+          service: alloy
+          environment: production
+          vlan: OBSERVABILITY
+
+  - job_name: ellie
+    static_configs:
+      - targets:
+          - ellie.example.internal:9100
+        labels:
+          site: midnightlabs
+          role: hypervisor
+          node: ellie
+          service: proxmox
+          environment: production
+          vlan: MANAGEMENT
+
+  - job_name: index
+    static_configs:
+      - targets:
+          - graphite-exporter:9108
+        labels:
+          site: midnightlabs
+          role: storage
+          node: index
+          service: truenas
+          environment: production
+          vlan: STORAGE
+
+  - job_name: midgar
+    metrics_path: /api/v1/allmetrics
+    params:
+      format:
+        - prometheus
+    static_configs:
+      - targets:
+          - midgar.example.internal:19999
+        labels:
+          site: midnightlabs
+          role: firewall
+          node: midgar
+          service: opnsense
+          environment: production
+          vlan: MANAGEMENT
+
+  - job_name: midgar-sw
+    metrics_path: /snmp
+    params:
+      auth:
+        - midgar_sw_v3
+      module:
+        - if_mib
+    static_configs:
+      - targets:
+          - midgar-sw.example.internal
+        labels:
+          site: midnightlabs
+          role: switching
+          node: midgar-sw
+          service: arubaos-switch
+          environment: production
+          vlan: MANAGEMENT
+    relabel_configs:
+      - source_labels:
+          - __address__
+        target_label: __param_target
+      - source_labels:
+          - __param_target
+        target_label: instance
+      - target_label: __address__
+        replacement: snmp-exporter:9116
+
+  - job_name: midgar-sw-topology
+    scrape_interval: 60s
+    scrape_timeout: 15s
+    metrics_path: /snmp
+    params:
+      auth:
+        - midgar_sw_v3
+      module:
+        - midgar_sw_lldp
+        - midgar_sw_bridge
+    static_configs:
+      - targets:
+          - midgar-sw.example.internal
+        labels:
+          site: midnightlabs
+          role: switching
+          node: midgar-sw
+          service: arubaos-switch
+          environment: production
+          vlan: MANAGEMENT
+          telemetry_lane: topology
+    relabel_configs:
+      - source_labels:
+          - __address__
+        target_label: __param_target
+      - source_labels:
+          - __param_target
+        target_label: instance
+      - target_label: __address__
+        replacement: snmp-exporter:9116
+
+  - job_name: midgar-sw-power
+    scrape_interval: 60s
+    scrape_timeout: 15s
+    metrics_path: /snmp
+    params:
+      auth:
+        - midgar_sw_v3
+      module:
+        - midgar_sw_poe
+        - midgar_sw_entity_sensor
+    static_configs:
+      - targets:
+          - midgar-sw.example.internal
+        labels:
+          site: midnightlabs
+          role: switching
+          node: midgar-sw
+          service: arubaos-switch
+          environment: production
+          vlan: MANAGEMENT
+          telemetry_lane: power
+    relabel_configs:
+      - source_labels:
+          - __address__
+        target_label: __param_target
+      - source_labels:
+          - __param_target
+        target_label: instance
+      - target_label: __address__
+        replacement: snmp-exporter:9116
+
+  - job_name: midgar-sw-inventory
+    scrape_interval: 5m
+    scrape_timeout: 15s
+    metrics_path: /snmp
+    params:
+      auth:
+        - midgar_sw_v3
+      module:
+        - system
+        - midgar_sw_entity
+    static_configs:
+      - targets:
+          - midgar-sw.example.internal
+        labels:
+          site: midnightlabs
+          role: switching
+          node: midgar-sw
+          service: arubaos-switch
+          environment: production
+          vlan: MANAGEMENT
+          telemetry_lane: inventory
+    relabel_configs:
+      - source_labels:
+          - __address__
+        target_label: __param_target
+      - source_labels:
+          - __param_target
+        target_label: instance
+      - target_label: __address__
+        replacement: snmp-exporter:9116
+
+  - job_name: unifi-controller
+    static_configs:
+      - targets:
+          - unifi-controller.example.internal:9100
+        labels:
+          site: midnightlabs
+          role: network-controller
+          node: unifi-controller
+          service: unifi-network
+          environment: production
+          vlan: MANAGEMENT
+
+  - job_name: home-assistant
+    metrics_path: /api/prometheus
+    authorization:
+      type: Bearer
+      credentials_file: /etc/prometheus/secrets/home-assistant.token
+    static_configs:
+      - targets:
+          - ha-core.example.internal:8123
+        labels:
+          site: midnightlabs
+          role: home-automation
+          node: ha-core
+          service: home-assistant
+          environment: production
+          vlan: SERVERS
+
+  - job_name: home-assistant-platform
+    scrape_interval: 30s
+    scrape_timeout: 10s
+    static_configs:
+      - targets:
+          - ha-core.example.internal:9101
+        labels:
+          site: midnightlabs
+          role: home-automation
+          node: ha-core
+          service: home-assistant
+          environment: production
+          vlan: SERVERS
+          telemetry_lane: platform
+
+  - job_name: domestic-ops
+    static_configs:
+      - targets:
+          - domestic-ops.example.internal:9100
+        labels:
+          site: midnightlabs
+          role: household-operations
+          node: domestic-ops
+          service: grocy-barcodebuddy
+          environment: production
+          vlan: SERVERS

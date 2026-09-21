@@ -1,0 +1,42 @@
+services:
+  graphite-exporter:
+    image: prom/graphite-exporter@sha256:c1a266f63a84fd11048ab6ad1552a4c497b14522d02823925247698e41eeac2b
+    container_name: observatory-graphite-exporter
+    restart: unless-stopped
+    ports:
+      - ${OBSERVATORY_BIND_ADDRESS:-127.0.0.1}:9109:9109/tcp
+      - 127.0.0.1:9108:9108
+    mem_limit: 256m
+    cpus: 0.25
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - telemetry
+
+  snmp-exporter:
+    image: prom/snmp-exporter@sha256:e5fd5e8b43ace6c088fe9bf0b37b7fff0e04380bee352be7ec41b853a4dd5859
+    container_name: observatory-snmp-exporter
+    restart: unless-stopped
+    user: "65534:65534"
+    command:
+      - --config.file=/etc/snmp_exporter/snmp.yml
+      - --config.file=/etc/snmp_exporter/auth.yml
+      - --config.file=/etc/snmp_exporter/midgar-sw.yml
+    volumes:
+      - ./secrets/snmp-exporter-auth.yml:/etc/snmp_exporter/auth.yml:ro
+      - ./config/snmp-exporter/snmp.midgar-sw.yml:/etc/snmp_exporter/midgar-sw.yml:ro
+    ports:
+      - 127.0.0.1:9116:9116
+    read_only: true
+    mem_limit: 256m
+    cpus: 0.25
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - telemetry
+
+  alloy:
+    ports:
+      - ${OBSERVATORY_BIND_ADDRESS:-127.0.0.1}:1514:1514/tcp
+      - ${OBSERVATORY_BIND_ADDRESS:-127.0.0.1}:1515:1515/tcp
+      - ${OBSERVATORY_BIND_ADDRESS:-127.0.0.1}:514:1516/udp

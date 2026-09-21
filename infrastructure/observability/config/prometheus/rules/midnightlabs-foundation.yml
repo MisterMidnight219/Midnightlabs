@@ -1,0 +1,158 @@
+groups:
+  - name: midnightlabs-fleet-recording
+    interval: 15s
+    rules:
+      - record: midnightlabs:target:up
+        expr: |
+          max by (
+            site,
+            node,
+            role,
+            service,
+            environment,
+            vlan,
+            job,
+            instance,
+            telemetry_lane
+          ) (
+            up
+          )
+
+      - record: midnightlabs:node:healthy
+        expr: |
+          min by (
+            site,
+            node,
+            environment,
+            vlan
+          ) (
+            up
+          )
+
+      - record: midnightlabs:fleet:healthy_targets
+        expr: sum(up == bool 1)
+
+      - record: midnightlabs:fleet:unhealthy_targets
+        expr: sum(up == bool 0)
+
+      - record: midnightlabs:fleet:healthy_nodes
+        expr: sum(midnightlabs:node:healthy == bool 1)
+
+      - record: midnightlabs:fleet:unhealthy_nodes
+        expr: sum(midnightlabs:node:healthy == bool 0)
+
+  - name: midnightlabs-foundation-alerts
+    interval: 15s
+    rules:
+      - alert: MidnightLabsTargetDown
+        expr: up == 0
+        for: 2m
+        labels:
+          severity: critical
+          scope: infrastructure
+        annotations:
+          summary: "{{ $labels.node }} target is down"
+          description: >-
+            Prometheus cannot scrape job {{ $labels.job }} at
+            {{ $labels.instance }} for more than two minutes.
+
+      - alert: MidnightLabsCollectorFailed
+        expr: |
+          (
+            midnightlabs_pve_collector_success == 0
+          )
+          or
+          (
+            midnightlabs_unifi_collector_success == 0
+          )
+          or
+          (
+            midnightlabs_ha_collector_success == 0
+          )
+          or
+          (
+            midnightlabs_domestic_ops_collector_success == 0
+          )
+        for: 2m
+        labels:
+          severity: critical
+          scope: telemetry
+        annotations:
+          summary: "{{ $labels.node }} enrichment collector failed"
+          description: >-
+            The custom telemetry collector on {{ $labels.node }}
+            has reported failure for more than two minutes.
+
+      - alert: MidnightLabsClockUnsynchronized
+        expr: |
+          (
+            node_timex_sync_status == 0
+          )
+          or
+          (
+            netdata_system_clock_sync_state_state_average{
+              dimension="state"
+            } == 0
+          )
+          or
+          (
+            midnightlabs_index_system_clock_sync_state_state == 0
+          )
+        for: 5m
+        labels:
+          severity: warning
+          scope: time-integrity
+        annotations:
+          summary: "{{ $labels.node }} clock is unsynchronized"
+          description: >-
+            {{ $labels.node }} has reported an unsynchronized clock
+            for more than five minutes.
+
+      - alert: MidnightLabsFilesystemLowSpace
+        expr: |
+          (
+            node_filesystem_avail_bytes{
+              fstype!~"tmpfs|devtmpfs|overlay|squashfs|nsfs"
+            }
+            /
+            node_filesystem_size_bytes{
+              fstype!~"tmpfs|devtmpfs|overlay|squashfs|nsfs"
+            }
+          ) < 0.10
+          and
+          node_filesystem_readonly{
+            fstype!~"tmpfs|devtmpfs|overlay|squashfs|nsfs"
+          } == 0
+        for: 15m
+        labels:
+          severity: warning
+          scope: capacity
+        annotations:
+          summary: "{{ $labels.node }} filesystem is below 10% free"
+          description: >-
+            Filesystem {{ $labels.mountpoint }} on {{ $labels.node }}
+            has remained below 10% available capacity for 15 minutes.
+
+      - alert: MidnightLabsPrometheusConfigReloadFailed
+        expr: prometheus_config_last_reload_successful == 0
+        for: 1m
+        labels:
+          severity: critical
+          scope: observability
+        annotations:
+          summary: "Prometheus rejected its configuration"
+          description: >-
+            Prometheus reports that its most recent configuration
+            reload failed.
+
+      - alert: MidnightLabsRuleEvaluationFailure
+        expr: increase(prometheus_rule_evaluation_failures_total[5m]) > 0
+        for: 1m
+        labels:
+          severity: critical
+          scope: observability
+        annotations:
+          summary: "Prometheus rule evaluation is failing"
+          description: >-
+            Prometheus recorded one or more rule evaluation failures
+            during the last five minutes.

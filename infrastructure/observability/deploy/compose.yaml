@@ -1,0 +1,72 @@
+name: observatory
+
+services:
+  prometheus:
+    image: prom/prometheus:v3.13.3
+    container_name: observatory-prometheus
+    restart: unless-stopped
+    user: "65534:65534"
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=15d
+      - --storage.tsdb.retention.size=12GB
+    volumes:
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./config/prometheus/rules:/etc/prometheus/rules:ro
+      - ./secrets/home-assistant.token:/etc/prometheus/secrets/home-assistant.token:ro
+      - ./data/prometheus:/prometheus
+    ports:
+      - 127.0.0.1:9090:9090
+    mem_limit: 1g
+    cpus: 0.75
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - telemetry
+
+  grafana:
+    image: grafana/grafana:13.2.1
+    container_name: observatory-grafana
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GF_SECURITY_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GF_SECURITY_ADMIN_PASSWORD}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_AUTH_ANONYMOUS_ENABLED: "false"
+    volumes:
+      - ./data/grafana:/var/lib/grafana
+      - ./config/grafana/provisioning:/etc/grafana/provisioning:ro
+    ports:
+      - ${OBSERVATORY_BIND_ADDRESS:-127.0.0.1}:3000:3000
+    mem_limit: 768m
+    cpus: 0.50
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - telemetry
+
+  node-exporter:
+    image: prom/node-exporter:v1.12.1
+    container_name: observatory-node-exporter
+    restart: unless-stopped
+    command:
+      - --path.rootfs=/host
+      - --path.procfs=/host/proc
+      - --path.sysfs=/host/sys
+    volumes:
+      - /:/host:ro,rslave
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+    group_add:
+      - "${DOCKER_GROUP_ID:?set DOCKER_GROUP_ID}"
+    mem_limit: 128m
+    cpus: 0.25
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - telemetry
+
+networks:
+  telemetry:
+    name: observatory-telemetry

@@ -1,0 +1,3732 @@
+# WARNING: This file was auto-generated using snmp_exporter generator, manual changes will be lost.
+modules:
+  midgar_sw_bridge:
+    walk:
+    - 1.3.6.1.2.1.17
+    metrics:
+    - name: dot1dBaseBridgeAddress
+      oid: 1.3.6.1.2.1.17.1.1
+      type: PhysAddress48
+      help: The MAC address used by this bridge when it must be referred to in a unique
+        fashion - 1.3.6.1.2.1.17.1.1
+    - name: dot1dBaseNumPorts
+      oid: 1.3.6.1.2.1.17.1.2
+      type: gauge
+      help: The number of ports controlled by this bridging entity. - 1.3.6.1.2.1.17.1.2
+    - name: dot1dBaseType
+      oid: 1.3.6.1.2.1.17.1.3
+      type: gauge
+      help: Indicates what type of bridging this bridge can perform - 1.3.6.1.2.1.17.1.3
+      enum_values:
+        1: unknown
+        2: transparent-only
+        3: sourceroute-only
+        4: srt
+    - name: dot1dBasePort
+      oid: 1.3.6.1.2.1.17.1.4.1.1
+      type: gauge
+      help: The port number of the port for which this entry contains bridge management
+        information. - 1.3.6.1.2.1.17.1.4.1.1
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+    - name: dot1dBasePortIfIndex
+      oid: 1.3.6.1.2.1.17.1.4.1.2
+      type: gauge
+      help: The value of the instance of the ifIndex object, defined in IF-MIB, for
+        the interface corresponding to this port. - 1.3.6.1.2.1.17.1.4.1.2
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+    - name: dot1dBasePortCircuit
+      oid: 1.3.6.1.2.1.17.1.4.1.3
+      type: OctetString
+      help: For a port that (potentially) has the same value of dot1dBasePortIfIndex
+        as another port on the same bridge - 1.3.6.1.2.1.17.1.4.1.3
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+    - name: dot1dBasePortDelayExceededDiscards
+      oid: 1.3.6.1.2.1.17.1.4.1.4
+      type: counter
+      help: The number of frames discarded by this port due to excessive transit delay
+        through the bridge - 1.3.6.1.2.1.17.1.4.1.4
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+    - name: dot1dBasePortMtuExceededDiscards
+      oid: 1.3.6.1.2.1.17.1.4.1.5
+      type: counter
+      help: The number of frames discarded by this port due to an excessive size -
+        1.3.6.1.2.1.17.1.4.1.5
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+    - name: dot1dStpProtocolSpecification
+      oid: 1.3.6.1.2.1.17.2.1
+      type: gauge
+      help: An indication of what version of the Spanning Tree Protocol is being run
+        - 1.3.6.1.2.1.17.2.1
+      enum_values:
+        1: unknown
+        2: decLb100
+        3: ieee8021d
+    - name: dot1dStpPriority
+      oid: 1.3.6.1.2.1.17.2.2
+      type: gauge
+      help: The value of the write-able portion of the Bridge ID (i.e., the first
+        two octets of the (8 octet long) Bridge ID) - 1.3.6.1.2.1.17.2.2
+    - name: dot1dStpTimeSinceTopologyChange
+      oid: 1.3.6.1.2.1.17.2.3
+      type: gauge
+      help: The time (in hundredths of a second) since the last time a topology change
+        was detected by the bridge entity - 1.3.6.1.2.1.17.2.3
+    - name: dot1dStpTopChanges
+      oid: 1.3.6.1.2.1.17.2.4
+      type: counter
+      help: The total number of topology changes detected by this bridge since the
+        management entity was last reset or initialized. - 1.3.6.1.2.1.17.2.4
+    - name: dot1dStpDesignatedRoot
+      oid: 1.3.6.1.2.1.17.2.5
+      type: OctetString
+      help: The bridge identifier of the root of the spanning tree, as determined
+        by the Spanning Tree Protocol, as executed by this node - 1.3.6.1.2.1.17.2.5
+    - name: dot1dStpRootCost
+      oid: 1.3.6.1.2.1.17.2.6
+      type: gauge
+      help: The cost of the path to the root as seen from this bridge. - 1.3.6.1.2.1.17.2.6
+    - name: dot1dStpRootPort
+      oid: 1.3.6.1.2.1.17.2.7
+      type: gauge
+      help: The port number of the port that offers the lowest cost path from this
+        bridge to the root bridge. - 1.3.6.1.2.1.17.2.7
+    - name: dot1dStpMaxAge
+      oid: 1.3.6.1.2.1.17.2.8
+      type: gauge
+      help: The maximum age of Spanning Tree Protocol information learned from the
+        network on any port before it is discarded, in units of hundredths of a second
+        - 1.3.6.1.2.1.17.2.8
+    - name: dot1dStpHelloTime
+      oid: 1.3.6.1.2.1.17.2.9
+      type: gauge
+      help: The amount of time between the transmission of Configuration bridge PDUs
+        by this node on any port when it is the root of the spanning tree, or trying
+        to become so, in units of hundredths of a second - 1.3.6.1.2.1.17.2.9
+    - name: dot1dStpHoldTime
+      oid: 1.3.6.1.2.1.17.2.10
+      type: gauge
+      help: This time value determines the interval length during which no more than
+        two Configuration bridge PDUs shall be transmitted by this node, in units
+        of hundredths of a second. - 1.3.6.1.2.1.17.2.10
+    - name: dot1dStpForwardDelay
+      oid: 1.3.6.1.2.1.17.2.11
+      type: gauge
+      help: This time value, measured in units of hundredths of a second, controls
+        how fast a port changes its spanning state when moving towards the Forwarding
+        state - 1.3.6.1.2.1.17.2.11
+    - name: dot1dStpBridgeMaxAge
+      oid: 1.3.6.1.2.1.17.2.12
+      type: gauge
+      help: The value that all bridges use for MaxAge when this bridge is acting as
+        the root - 1.3.6.1.2.1.17.2.12
+    - name: dot1dStpBridgeHelloTime
+      oid: 1.3.6.1.2.1.17.2.13
+      type: gauge
+      help: The value that all bridges use for HelloTime when this bridge is acting
+        as the root - 1.3.6.1.2.1.17.2.13
+    - name: dot1dStpBridgeForwardDelay
+      oid: 1.3.6.1.2.1.17.2.14
+      type: gauge
+      help: The value that all bridges use for ForwardDelay when this bridge is acting
+        as the root - 1.3.6.1.2.1.17.2.14
+    - name: dot1dStpPort
+      oid: 1.3.6.1.2.1.17.2.15.1.1
+      type: gauge
+      help: The port number of the port for which this entry contains Spanning Tree
+        Protocol management information. - 1.3.6.1.2.1.17.2.15.1.1
+      indexes:
+      - labelname: dot1dStpPort
+        type: gauge
+    - name: dot1dStpPortPriority
+      oid: 1.3.6.1.2.1.17.2.15.1.2
+      type: gauge
+      help: The value of the priority field that is contained in the first (in network
+        byte order) octet of the (2 octet long) Port ID - 1.3.6.1.2.1.17.2.15.1.2
+      indexes:
+      - labelname: dot1dStpPort
+        type: gauge
+    - name: dot1dStpPortState
+      oid: 1.3.6.1.2.1.17.2.15.1.3
+      type: gauge
+      help: The port's current state, as defined by application of the Spanning Tree
+        Protocol - 1.3.6.1.2.1.17.2.15.1.3
+      indexes:
+      - labelname: dot1dStpPort
+        type: gauge
+      enum_values:
+        1: disabled
+        2: blocking
+        3: listening
+        4: learning
+        5: forwarding
+        6: broken
+    - name: dot1dStpPortEnable
+      oid: 1.3.6.1.2.1.17.2.15.1.4
+      type: gauge
+      help: The enabled/disabled status of the port. - 1.3.6.1.2.1.17.2.15.1.4
+      indexes:
+      - labelname: dot1dStpPort
+        type: gauge
+      enum_values:
+        1: enabled
+        2: disabled
+    - name: dot1dStpPortPathCost
+      oid: 1.3.6.1.2.1.17.2.15.1.5
+      type: gauge
+      help: The contribution of this port to the path cost of paths towards the spanning
+        tree root which include this port - 1.3.6.1.2.1.17.2.15.1.5
+      indexes:
+      - labelname: dot1dStpPort
+        type: gauge
+    - name: dot1dStpPortDesignatedRoot
+      oid: 1.3.6.1.2.1.17.2.15.1.6
+      type: OctetString
+      help: The unique Bridge Identifier of the Bridge recorded as the Root in the
+        Configuration BPDUs transmitted by the Designated Bridge for the segment to
+        which the port is attached. - 1.3.6.1.2.1.17.2.15.1.6
+      indexes:
+      - labelname: dot1dStpPort
+        type: gauge
+    - name: dot1dStpPortDesignatedCost
+      oid: 1.3.6.1.2.1.17.2.15.1.7
+      type: gauge
+      help: The path cost of the Designated Port of the segment connected to this
+        port - 1.3.6.1.2.1.17.2.15.1.7
+      indexes:
+      - labelname: dot1dStpPort
+        type: gauge
+    - name: dot1dStpPortDesignatedBridge
+      oid: 1.3.6.1.2.1.17.2.15.1.8
+      type: OctetString
+      help: The Bridge Identifier of the bridge that this port considers to be the
+        Designated Bridge for this port's segment. - 1.3.6.1.2.1.17.2.15.1.8
+      indexes:
+      - labelname: dot1dStpPort
+        type: gauge
+    - name: dot1dStpPortDesignatedPort
+      oid: 1.3.6.1.2.1.17.2.15.1.9
+      type: OctetString
+      help: The Port Identifier of the port on the Designated Bridge for this port's
+        segment. - 1.3.6.1.2.1.17.2.15.1.9
+      indexes:
+      - labelname: dot1dStpPort
+        type: gauge
+    - name: dot1dStpPortForwardTransitions
+      oid: 1.3.6.1.2.1.17.2.15.1.10
+      type: counter
+      help: The number of times this port has transitioned from the Learning state
+        to the Forwarding state. - 1.3.6.1.2.1.17.2.15.1.10
+      indexes:
+      - labelname: dot1dStpPort
+        type: gauge
+    - name: dot1dStpPortPathCost32
+      oid: 1.3.6.1.2.1.17.2.15.1.11
+      type: gauge
+      help: The contribution of this port to the path cost of paths towards the spanning
+        tree root which include this port - 1.3.6.1.2.1.17.2.15.1.11
+      indexes:
+      - labelname: dot1dStpPort
+        type: gauge
+    - name: dot1dTpLearnedEntryDiscards
+      oid: 1.3.6.1.2.1.17.4.1
+      type: counter
+      help: The total number of Forwarding Database entries that have been or would
+        have been learned, but have been discarded due to a lack of storage space
+        in the Forwarding Database - 1.3.6.1.2.1.17.4.1
+    - name: dot1dTpAgingTime
+      oid: 1.3.6.1.2.1.17.4.2
+      type: gauge
+      help: The timeout period in seconds for aging out dynamically-learned forwarding
+        information - 1.3.6.1.2.1.17.4.2
+    - name: dot1dTpFdbAddress
+      oid: 1.3.6.1.2.1.17.4.3.1.1
+      type: PhysAddress48
+      help: A unicast MAC address for which the bridge has forwarding and/or filtering
+        information. - 1.3.6.1.2.1.17.4.3.1.1
+      indexes:
+      - labelname: dot1dTpFdbAddress
+        type: PhysAddress48
+        fixed_size: 6
+    - name: dot1dTpFdbPort
+      oid: 1.3.6.1.2.1.17.4.3.1.2
+      type: gauge
+      help: Either the value '0', or the port number of the port on which a frame
+        having a source address equal to the value of the corresponding instance of
+        dot1dTpFdbAddress has been seen - 1.3.6.1.2.1.17.4.3.1.2
+      indexes:
+      - labelname: dot1dTpFdbAddress
+        type: PhysAddress48
+        fixed_size: 6
+    - name: dot1dTpFdbStatus
+      oid: 1.3.6.1.2.1.17.4.3.1.3
+      type: gauge
+      help: The status of this entry - 1.3.6.1.2.1.17.4.3.1.3
+      indexes:
+      - labelname: dot1dTpFdbAddress
+        type: PhysAddress48
+        fixed_size: 6
+      enum_values:
+        1: other
+        2: invalid
+        3: learned
+        4: self
+        5: mgmt
+    - name: dot1dTpPort
+      oid: 1.3.6.1.2.1.17.4.4.1.1
+      type: gauge
+      help: The port number of the port for which this entry contains Transparent
+        bridging management information. - 1.3.6.1.2.1.17.4.4.1.1
+      indexes:
+      - labelname: dot1dTpPort
+        type: gauge
+    - name: dot1dTpPortMaxInfo
+      oid: 1.3.6.1.2.1.17.4.4.1.2
+      type: gauge
+      help: The maximum size of the INFO (non-MAC) field that this port will receive
+        or transmit. - 1.3.6.1.2.1.17.4.4.1.2
+      indexes:
+      - labelname: dot1dTpPort
+        type: gauge
+    - name: dot1dTpPortInFrames
+      oid: 1.3.6.1.2.1.17.4.4.1.3
+      type: counter
+      help: The number of frames that have been received by this port from its segment
+        - 1.3.6.1.2.1.17.4.4.1.3
+      indexes:
+      - labelname: dot1dTpPort
+        type: gauge
+    - name: dot1dTpPortOutFrames
+      oid: 1.3.6.1.2.1.17.4.4.1.4
+      type: counter
+      help: The number of frames that have been transmitted by this port to its segment
+        - 1.3.6.1.2.1.17.4.4.1.4
+      indexes:
+      - labelname: dot1dTpPort
+        type: gauge
+    - name: dot1dTpPortInDiscards
+      oid: 1.3.6.1.2.1.17.4.4.1.5
+      type: counter
+      help: Count of received valid frames that were discarded (i.e., filtered) by
+        the Forwarding Process. - 1.3.6.1.2.1.17.4.4.1.5
+      indexes:
+      - labelname: dot1dTpPort
+        type: gauge
+    - name: dot1dTpHCPortInFrames
+      oid: 1.3.6.1.2.1.17.4.5.1.1
+      type: counter
+      help: The number of frames that have been received by this port from its segment
+        - 1.3.6.1.2.1.17.4.5.1.1
+      indexes:
+      - labelname: dot1dTpPort
+        type: gauge
+    - name: dot1dTpHCPortOutFrames
+      oid: 1.3.6.1.2.1.17.4.5.1.2
+      type: counter
+      help: The number of frames that have been transmitted by this port to its segment
+        - 1.3.6.1.2.1.17.4.5.1.2
+      indexes:
+      - labelname: dot1dTpPort
+        type: gauge
+    - name: dot1dTpHCPortInDiscards
+      oid: 1.3.6.1.2.1.17.4.5.1.3
+      type: counter
+      help: Count of valid frames that have been received by this port from its segment
+        that were discarded (i.e., filtered) by the Forwarding Process. - 1.3.6.1.2.1.17.4.5.1.3
+      indexes:
+      - labelname: dot1dTpPort
+        type: gauge
+    - name: dot1dTpPortInOverflowFrames
+      oid: 1.3.6.1.2.1.17.4.6.1.1
+      type: counter
+      help: The number of times the associated dot1dTpPortInFrames counter has overflowed.
+        - 1.3.6.1.2.1.17.4.6.1.1
+      indexes:
+      - labelname: dot1dTpPort
+        type: gauge
+    - name: dot1dTpPortOutOverflowFrames
+      oid: 1.3.6.1.2.1.17.4.6.1.2
+      type: counter
+      help: The number of times the associated dot1dTpPortOutFrames counter has overflowed.
+        - 1.3.6.1.2.1.17.4.6.1.2
+      indexes:
+      - labelname: dot1dTpPort
+        type: gauge
+    - name: dot1dTpPortInOverflowDiscards
+      oid: 1.3.6.1.2.1.17.4.6.1.3
+      type: counter
+      help: The number of times the associated dot1dTpPortInDiscards counter has overflowed.
+        - 1.3.6.1.2.1.17.4.6.1.3
+      indexes:
+      - labelname: dot1dTpPort
+        type: gauge
+    - name: dot1dStaticAddress
+      oid: 1.3.6.1.2.1.17.5.1.1.1
+      type: PhysAddress48
+      help: The destination MAC address in a frame to which this entry's filtering
+        information applies - 1.3.6.1.2.1.17.5.1.1.1
+      indexes:
+      - labelname: dot1dStaticAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1dStaticReceivePort
+        type: gauge
+    - name: dot1dStaticReceivePort
+      oid: 1.3.6.1.2.1.17.5.1.1.2
+      type: gauge
+      help: Either the value '0', or the port number of the port from which a frame
+        must be received in order for this entry's filtering information to apply
+        - 1.3.6.1.2.1.17.5.1.1.2
+      indexes:
+      - labelname: dot1dStaticAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1dStaticReceivePort
+        type: gauge
+    - name: dot1dStaticAllowedToGoTo
+      oid: 1.3.6.1.2.1.17.5.1.1.3
+      type: OctetString
+      help: The set of ports to which frames received from a specific port and destined
+        for a specific MAC address, are allowed to be forwarded - 1.3.6.1.2.1.17.5.1.1.3
+      indexes:
+      - labelname: dot1dStaticAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1dStaticReceivePort
+        type: gauge
+    - name: dot1dStaticStatus
+      oid: 1.3.6.1.2.1.17.5.1.1.4
+      type: gauge
+      help: This object indicates the status of this entry - 1.3.6.1.2.1.17.5.1.1.4
+      indexes:
+      - labelname: dot1dStaticAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1dStaticReceivePort
+        type: gauge
+      enum_values:
+        1: other
+        2: invalid
+        3: permanent
+        4: deleteOnReset
+        5: deleteOnTimeout
+    - name: dot1dDeviceCapabilities
+      oid: 1.3.6.1.2.1.17.6.1.1.1
+      type: Bits
+      help: Indicates the optional parts of IEEE 802.1D and 802.1Q that are implemented
+        by this device and are manageable through this MIB - 1.3.6.1.2.1.17.6.1.1.1
+      enum_values:
+        0: dot1dExtendedFilteringServices
+        1: dot1dTrafficClasses
+        2: dot1qStaticEntryIndividualPort
+        3: dot1qIVLCapable
+        4: dot1qSVLCapable
+        5: dot1qHybridCapable
+        6: dot1qConfigurablePvidTagging
+        7: dot1dLocalVlanCapable
+    - name: dot1dTrafficClassesEnabled
+      oid: 1.3.6.1.2.1.17.6.1.1.2
+      type: gauge
+      help: The value true(1) indicates that Traffic Classes are enabled on this bridge
+        - 1.3.6.1.2.1.17.6.1.1.2
+      enum_values:
+        1: "true"
+        2: "false"
+    - name: dot1dGmrpStatus
+      oid: 1.3.6.1.2.1.17.6.1.1.3
+      type: gauge
+      help: The administrative status requested by management for GMRP - 1.3.6.1.2.1.17.6.1.1.3
+      enum_values:
+        1: enabled
+        2: disabled
+    - name: dot1dPortCapabilities
+      oid: 1.3.6.1.2.1.17.6.1.1.4.1.1
+      type: Bits
+      help: Indicates the parts of IEEE 802.1D and 802.1Q that are optional on a per-port
+        basis, that are implemented by this device, and that are manageable through
+        this MIB - 1.3.6.1.2.1.17.6.1.1.4.1.1
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      enum_values:
+        0: dot1qDot1qTagging
+        1: dot1qConfigurableAcceptableFrameTypes
+        2: dot1qIngressFiltering
+    - name: dot1dPortDefaultUserPriority
+      oid: 1.3.6.1.2.1.17.6.1.2.1.1.1
+      type: gauge
+      help: The default ingress User Priority for this port - 1.3.6.1.2.1.17.6.1.2.1.1.1
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+    - name: dot1dPortNumTrafficClasses
+      oid: 1.3.6.1.2.1.17.6.1.2.1.1.2
+      type: gauge
+      help: The number of egress traffic classes supported on this port - 1.3.6.1.2.1.17.6.1.2.1.1.2
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+    - name: dot1dUserPriority
+      oid: 1.3.6.1.2.1.17.6.1.2.2.1.1
+      type: gauge
+      help: The User Priority for a frame received on this port. - 1.3.6.1.2.1.17.6.1.2.2.1.1
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1dUserPriority
+        type: gauge
+    - name: dot1dRegenUserPriority
+      oid: 1.3.6.1.2.1.17.6.1.2.2.1.2
+      type: gauge
+      help: The Regenerated User Priority that the incoming User Priority is mapped
+        to for this port - 1.3.6.1.2.1.17.6.1.2.2.1.2
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1dUserPriority
+        type: gauge
+    - name: dot1dTrafficClassPriority
+      oid: 1.3.6.1.2.1.17.6.1.2.3.1.1
+      type: gauge
+      help: The Priority value determined for the received frame - 1.3.6.1.2.1.17.6.1.2.3.1.1
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1dTrafficClassPriority
+        type: gauge
+    - name: dot1dTrafficClass
+      oid: 1.3.6.1.2.1.17.6.1.2.3.1.2
+      type: gauge
+      help: The Traffic Class the received frame is mapped to - 1.3.6.1.2.1.17.6.1.2.3.1.2
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1dTrafficClassPriority
+        type: gauge
+    - name: dot1dPortOutboundAccessPriority
+      oid: 1.3.6.1.2.1.17.6.1.2.4.1.1
+      type: gauge
+      help: The Outbound Access Priority the received frame is mapped to. - 1.3.6.1.2.1.17.6.1.2.4.1.1
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1dRegenUserPriority
+        type: gauge
+    - name: dot1dPortGarpJoinTime
+      oid: 1.3.6.1.2.1.17.6.1.3.1.1.1
+      type: gauge
+      help: The GARP Join time, in centiseconds - 1.3.6.1.2.1.17.6.1.3.1.1.1
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+    - name: dot1dPortGarpLeaveTime
+      oid: 1.3.6.1.2.1.17.6.1.3.1.1.2
+      type: gauge
+      help: The GARP Leave time, in centiseconds - 1.3.6.1.2.1.17.6.1.3.1.1.2
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+    - name: dot1dPortGarpLeaveAllTime
+      oid: 1.3.6.1.2.1.17.6.1.3.1.1.3
+      type: gauge
+      help: The GARP LeaveAll time, in centiseconds - 1.3.6.1.2.1.17.6.1.3.1.1.3
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+    - name: dot1dPortGmrpStatus
+      oid: 1.3.6.1.2.1.17.6.1.4.1.1.1
+      type: gauge
+      help: The administrative state of GMRP operation on this port - 1.3.6.1.2.1.17.6.1.4.1.1.1
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      enum_values:
+        1: enabled
+        2: disabled
+    - name: dot1dPortGmrpFailedRegistrations
+      oid: 1.3.6.1.2.1.17.6.1.4.1.1.2
+      type: counter
+      help: The total number of failed GMRP registrations, for any reason, in all
+        VLANs, on this port. - 1.3.6.1.2.1.17.6.1.4.1.1.2
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+    - name: dot1dPortGmrpLastPduOrigin
+      oid: 1.3.6.1.2.1.17.6.1.4.1.1.3
+      type: PhysAddress48
+      help: The Source MAC Address of the last GMRP message received on this port.
+        - 1.3.6.1.2.1.17.6.1.4.1.1.3
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+    - name: dot1dPortRestrictedGroupRegistration
+      oid: 1.3.6.1.2.1.17.6.1.4.1.1.4
+      type: gauge
+      help: The state of Restricted Group Registration on this port - 1.3.6.1.2.1.17.6.1.4.1.1.4
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      enum_values:
+        1: "true"
+        2: "false"
+    - name: dot1qVlanVersionNumber
+      oid: 1.3.6.1.2.1.17.7.1.1.1
+      type: gauge
+      help: The version number of IEEE 802.1Q that this device supports. - 1.3.6.1.2.1.17.7.1.1.1
+      enum_values:
+        1: version1
+    - name: dot1qMaxVlanId
+      oid: 1.3.6.1.2.1.17.7.1.1.2
+      type: gauge
+      help: The maximum IEEE 802.1Q VLAN-ID that this device supports. - 1.3.6.1.2.1.17.7.1.1.2
+    - name: dot1qMaxSupportedVlans
+      oid: 1.3.6.1.2.1.17.7.1.1.3
+      type: gauge
+      help: The maximum number of IEEE 802.1Q VLANs that this device supports. - 1.3.6.1.2.1.17.7.1.1.3
+    - name: dot1qNumVlans
+      oid: 1.3.6.1.2.1.17.7.1.1.4
+      type: gauge
+      help: The current number of IEEE 802.1Q VLANs that are configured in this device.
+        - 1.3.6.1.2.1.17.7.1.1.4
+    - name: dot1qGvrpStatus
+      oid: 1.3.6.1.2.1.17.7.1.1.5
+      type: gauge
+      help: The administrative status requested by management for GVRP - 1.3.6.1.2.1.17.7.1.1.5
+      enum_values:
+        1: enabled
+        2: disabled
+    - name: dot1qFdbId
+      oid: 1.3.6.1.2.1.17.7.1.2.1.1.1
+      type: gauge
+      help: The identity of this Filtering Database. - 1.3.6.1.2.1.17.7.1.2.1.1.1
+      indexes:
+      - labelname: dot1qFdbId
+        type: gauge
+    - name: dot1qFdbDynamicCount
+      oid: 1.3.6.1.2.1.17.7.1.2.1.1.2
+      type: counter
+      help: The current number of dynamic entries in this Filtering Database. - 1.3.6.1.2.1.17.7.1.2.1.1.2
+      indexes:
+      - labelname: dot1qFdbId
+        type: gauge
+    - name: dot1qTpFdbAddress
+      oid: 1.3.6.1.2.1.17.7.1.2.2.1.1
+      type: PhysAddress48
+      help: A unicast MAC address for which the device has forwarding and/or filtering
+        information. - 1.3.6.1.2.1.17.7.1.2.2.1.1
+      indexes:
+      - labelname: dot1qFdbId
+        type: gauge
+      - labelname: dot1qTpFdbAddress
+        type: PhysAddress48
+        fixed_size: 6
+    - name: dot1qTpFdbPort
+      oid: 1.3.6.1.2.1.17.7.1.2.2.1.2
+      type: gauge
+      help: Either the value '0', or the port number of the port on which a frame
+        having a source address equal to the value of the corresponding instance of
+        dot1qTpFdbAddress has been seen - 1.3.6.1.2.1.17.7.1.2.2.1.2
+      indexes:
+      - labelname: dot1qFdbId
+        type: gauge
+      - labelname: dot1qTpFdbAddress
+        type: PhysAddress48
+        fixed_size: 6
+    - name: dot1qTpFdbStatus
+      oid: 1.3.6.1.2.1.17.7.1.2.2.1.3
+      type: gauge
+      help: The status of this entry - 1.3.6.1.2.1.17.7.1.2.2.1.3
+      indexes:
+      - labelname: dot1qFdbId
+        type: gauge
+      - labelname: dot1qTpFdbAddress
+        type: PhysAddress48
+        fixed_size: 6
+      enum_values:
+        1: other
+        2: invalid
+        3: learned
+        4: self
+        5: mgmt
+    - name: dot1qTpGroupAddress
+      oid: 1.3.6.1.2.1.17.7.1.2.3.1.1
+      type: PhysAddress48
+      help: The destination Group MAC address in a frame to which this entry's filtering
+        information applies. - 1.3.6.1.2.1.17.7.1.2.3.1.1
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+      - labelname: dot1qTpGroupAddress
+        type: PhysAddress48
+        fixed_size: 6
+    - name: dot1qTpGroupEgressPorts
+      oid: 1.3.6.1.2.1.17.7.1.2.3.1.2
+      type: OctetString
+      help: The complete set of ports, in this VLAN, to which frames destined for
+        this Group MAC address are currently being explicitly forwarded - 1.3.6.1.2.1.17.7.1.2.3.1.2
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+      - labelname: dot1qTpGroupAddress
+        type: PhysAddress48
+        fixed_size: 6
+    - name: dot1qTpGroupLearnt
+      oid: 1.3.6.1.2.1.17.7.1.2.3.1.3
+      type: OctetString
+      help: The subset of ports in dot1qTpGroupEgressPorts that were learned by GMRP
+        or some other dynamic mechanism, in this Filtering database. - 1.3.6.1.2.1.17.7.1.2.3.1.3
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+      - labelname: dot1qTpGroupAddress
+        type: PhysAddress48
+        fixed_size: 6
+    - name: dot1qForwardAllPorts
+      oid: 1.3.6.1.2.1.17.7.1.2.4.1.1
+      type: OctetString
+      help: The complete set of ports in this VLAN to which all multicast group-addressed
+        frames are to be forwarded - 1.3.6.1.2.1.17.7.1.2.4.1.1
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qForwardAllStaticPorts
+      oid: 1.3.6.1.2.1.17.7.1.2.4.1.2
+      type: OctetString
+      help: The set of ports configured by management in this VLAN to which all multicast
+        group-addressed frames are to be forwarded - 1.3.6.1.2.1.17.7.1.2.4.1.2
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qForwardAllForbiddenPorts
+      oid: 1.3.6.1.2.1.17.7.1.2.4.1.3
+      type: OctetString
+      help: The set of ports configured by management in this VLAN for which the Service
+        Requirement attribute Forward All Multicast Groups may not be dynamically
+        registered by GMRP - 1.3.6.1.2.1.17.7.1.2.4.1.3
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qForwardUnregisteredPorts
+      oid: 1.3.6.1.2.1.17.7.1.2.5.1.1
+      type: OctetString
+      help: The complete set of ports in this VLAN to which multicast group-addressed
+        frames for which there is no more specific forwarding information will be
+        forwarded - 1.3.6.1.2.1.17.7.1.2.5.1.1
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qForwardUnregisteredStaticPorts
+      oid: 1.3.6.1.2.1.17.7.1.2.5.1.2
+      type: OctetString
+      help: The set of ports configured by management, in this VLAN, to which multicast
+        group-addressed frames for which there is no more specific forwarding information
+        are to be forwarded - 1.3.6.1.2.1.17.7.1.2.5.1.2
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qForwardUnregisteredForbiddenPorts
+      oid: 1.3.6.1.2.1.17.7.1.2.5.1.3
+      type: OctetString
+      help: The set of ports configured by management in this VLAN for which the Service
+        Requirement attribute Forward Unregistered Multicast Groups may not be dynamically
+        registered by GMRP - 1.3.6.1.2.1.17.7.1.2.5.1.3
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qStaticUnicastAddress
+      oid: 1.3.6.1.2.1.17.7.1.3.1.1.1
+      type: PhysAddress48
+      help: The destination MAC address in a frame to which this entry's filtering
+        information applies - 1.3.6.1.2.1.17.7.1.3.1.1.1
+      indexes:
+      - labelname: dot1qFdbId
+        type: gauge
+      - labelname: dot1qStaticUnicastAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1qStaticUnicastReceivePort
+        type: gauge
+    - name: dot1qStaticUnicastReceivePort
+      oid: 1.3.6.1.2.1.17.7.1.3.1.1.2
+      type: gauge
+      help: Either the value '0' or the port number of the port from which a frame
+        must be received in order for this entry's filtering information to apply
+        - 1.3.6.1.2.1.17.7.1.3.1.1.2
+      indexes:
+      - labelname: dot1qFdbId
+        type: gauge
+      - labelname: dot1qStaticUnicastAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1qStaticUnicastReceivePort
+        type: gauge
+    - name: dot1qStaticUnicastAllowedToGoTo
+      oid: 1.3.6.1.2.1.17.7.1.3.1.1.3
+      type: OctetString
+      help: The set of ports for which a frame with a specific unicast address will
+        be flooded in the event that it has not been learned - 1.3.6.1.2.1.17.7.1.3.1.1.3
+      indexes:
+      - labelname: dot1qFdbId
+        type: gauge
+      - labelname: dot1qStaticUnicastAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1qStaticUnicastReceivePort
+        type: gauge
+    - name: dot1qStaticUnicastStatus
+      oid: 1.3.6.1.2.1.17.7.1.3.1.1.4
+      type: gauge
+      help: This object indicates the status of this entry - 1.3.6.1.2.1.17.7.1.3.1.1.4
+      indexes:
+      - labelname: dot1qFdbId
+        type: gauge
+      - labelname: dot1qStaticUnicastAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1qStaticUnicastReceivePort
+        type: gauge
+      enum_values:
+        1: other
+        2: invalid
+        3: permanent
+        4: deleteOnReset
+        5: deleteOnTimeout
+    - name: dot1qStaticMulticastAddress
+      oid: 1.3.6.1.2.1.17.7.1.3.2.1.1
+      type: PhysAddress48
+      help: The destination MAC address in a frame to which this entry's filtering
+        information applies - 1.3.6.1.2.1.17.7.1.3.2.1.1
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+      - labelname: dot1qStaticMulticastAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1qStaticMulticastReceivePort
+        type: gauge
+    - name: dot1qStaticMulticastReceivePort
+      oid: 1.3.6.1.2.1.17.7.1.3.2.1.2
+      type: gauge
+      help: Either the value '0' or the port number of the port from which a frame
+        must be received in order for this entry's filtering information to apply
+        - 1.3.6.1.2.1.17.7.1.3.2.1.2
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+      - labelname: dot1qStaticMulticastAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1qStaticMulticastReceivePort
+        type: gauge
+    - name: dot1qStaticMulticastStaticEgressPorts
+      oid: 1.3.6.1.2.1.17.7.1.3.2.1.3
+      type: OctetString
+      help: The set of ports to which frames received from a specific port and destined
+        for a specific Multicast or Broadcast MAC address must be forwarded, regardless
+        of any dynamic information, e.g., from GMRP - 1.3.6.1.2.1.17.7.1.3.2.1.3
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+      - labelname: dot1qStaticMulticastAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1qStaticMulticastReceivePort
+        type: gauge
+    - name: dot1qStaticMulticastForbiddenEgressPorts
+      oid: 1.3.6.1.2.1.17.7.1.3.2.1.4
+      type: OctetString
+      help: The set of ports to which frames received from a specific port and destined
+        for a specific Multicast or Broadcast MAC address must not be forwarded, regardless
+        of any dynamic information, e.g., from GMRP - 1.3.6.1.2.1.17.7.1.3.2.1.4
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+      - labelname: dot1qStaticMulticastAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1qStaticMulticastReceivePort
+        type: gauge
+    - name: dot1qStaticMulticastStatus
+      oid: 1.3.6.1.2.1.17.7.1.3.2.1.5
+      type: gauge
+      help: This object indicates the status of this entry - 1.3.6.1.2.1.17.7.1.3.2.1.5
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+      - labelname: dot1qStaticMulticastAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1qStaticMulticastReceivePort
+        type: gauge
+      enum_values:
+        1: other
+        2: invalid
+        3: permanent
+        4: deleteOnReset
+        5: deleteOnTimeout
+    - name: dot1qVlanNumDeletes
+      oid: 1.3.6.1.2.1.17.7.1.4.1
+      type: counter
+      help: The number of times a VLAN entry has been deleted from the dot1qVlanCurrentTable
+        (for any reason) - 1.3.6.1.2.1.17.7.1.4.1
+    - name: dot1qVlanTimeMark
+      oid: 1.3.6.1.2.1.17.7.1.4.2.1.1
+      type: gauge
+      help: A TimeFilter for this entry - 1.3.6.1.2.1.17.7.1.4.2.1.1
+      indexes:
+      - labelname: dot1qVlanTimeMark
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanIndex
+      oid: 1.3.6.1.2.1.17.7.1.4.2.1.2
+      type: gauge
+      help: The VLAN-ID or other identifier referring to this VLAN. - 1.3.6.1.2.1.17.7.1.4.2.1.2
+      indexes:
+      - labelname: dot1qVlanTimeMark
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanFdbId
+      oid: 1.3.6.1.2.1.17.7.1.4.2.1.3
+      type: gauge
+      help: The Filtering Database used by this VLAN - 1.3.6.1.2.1.17.7.1.4.2.1.3
+      indexes:
+      - labelname: dot1qVlanTimeMark
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanCurrentEgressPorts
+      oid: 1.3.6.1.2.1.17.7.1.4.2.1.4
+      type: OctetString
+      help: The set of ports that are transmitting traffic for this VLAN as either
+        tagged or untagged frames. - 1.3.6.1.2.1.17.7.1.4.2.1.4
+      indexes:
+      - labelname: dot1qVlanTimeMark
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanCurrentUntaggedPorts
+      oid: 1.3.6.1.2.1.17.7.1.4.2.1.5
+      type: OctetString
+      help: The set of ports that are transmitting traffic for this VLAN as untagged
+        frames. - 1.3.6.1.2.1.17.7.1.4.2.1.5
+      indexes:
+      - labelname: dot1qVlanTimeMark
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanStatus
+      oid: 1.3.6.1.2.1.17.7.1.4.2.1.6
+      type: gauge
+      help: This object indicates the status of this entry - 1.3.6.1.2.1.17.7.1.4.2.1.6
+      indexes:
+      - labelname: dot1qVlanTimeMark
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+      enum_values:
+        1: other
+        2: permanent
+        3: dynamicGvrp
+    - name: dot1qVlanCreationTime
+      oid: 1.3.6.1.2.1.17.7.1.4.2.1.7
+      type: gauge
+      help: The value of sysUpTime when this VLAN was created. - 1.3.6.1.2.1.17.7.1.4.2.1.7
+      indexes:
+      - labelname: dot1qVlanTimeMark
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanStaticName
+      oid: 1.3.6.1.2.1.17.7.1.4.3.1.1
+      type: DisplayString
+      help: An administratively assigned string, which may be used to identify the
+        VLAN. - 1.3.6.1.2.1.17.7.1.4.3.1.1
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanStaticEgressPorts
+      oid: 1.3.6.1.2.1.17.7.1.4.3.1.2
+      type: OctetString
+      help: The set of ports that are permanently assigned to the egress list for
+        this VLAN by management - 1.3.6.1.2.1.17.7.1.4.3.1.2
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanForbiddenEgressPorts
+      oid: 1.3.6.1.2.1.17.7.1.4.3.1.3
+      type: OctetString
+      help: The set of ports that are prohibited by management from being included
+        in the egress list for this VLAN - 1.3.6.1.2.1.17.7.1.4.3.1.3
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanStaticUntaggedPorts
+      oid: 1.3.6.1.2.1.17.7.1.4.3.1.4
+      type: OctetString
+      help: The set of ports that should transmit egress packets for this VLAN as
+        untagged - 1.3.6.1.2.1.17.7.1.4.3.1.4
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanStaticRowStatus
+      oid: 1.3.6.1.2.1.17.7.1.4.3.1.5
+      type: gauge
+      help: This object indicates the status of this entry. - 1.3.6.1.2.1.17.7.1.4.3.1.5
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+      enum_values:
+        1: active
+        2: notInService
+        3: notReady
+        4: createAndGo
+        5: createAndWait
+        6: destroy
+    - name: dot1qNextFreeLocalVlanIndex
+      oid: 1.3.6.1.2.1.17.7.1.4.4
+      type: gauge
+      help: The next available value for dot1qVlanIndex of a local VLAN entry in dot1qVlanStaticTable
+        - 1.3.6.1.2.1.17.7.1.4.4
+    - name: dot1qPvid
+      oid: 1.3.6.1.2.1.17.7.1.4.5.1.1
+      type: gauge
+      help: The PVID, the VLAN-ID assigned to untagged frames or Priority-Tagged frames
+        received on this port - 1.3.6.1.2.1.17.7.1.4.5.1.1
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+    - name: dot1qPortAcceptableFrameTypes
+      oid: 1.3.6.1.2.1.17.7.1.4.5.1.2
+      type: gauge
+      help: When this is admitOnlyVlanTagged(2), the device will discard untagged
+        frames or Priority-Tagged frames received on this port - 1.3.6.1.2.1.17.7.1.4.5.1.2
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      enum_values:
+        1: admitAll
+        2: admitOnlyVlanTagged
+    - name: dot1qPortIngressFiltering
+      oid: 1.3.6.1.2.1.17.7.1.4.5.1.3
+      type: gauge
+      help: When this is true(1), the device will discard incoming frames for VLANs
+        that do not include this Port in its Member set - 1.3.6.1.2.1.17.7.1.4.5.1.3
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      enum_values:
+        1: "true"
+        2: "false"
+    - name: dot1qPortGvrpStatus
+      oid: 1.3.6.1.2.1.17.7.1.4.5.1.4
+      type: gauge
+      help: The state of GVRP operation on this port - 1.3.6.1.2.1.17.7.1.4.5.1.4
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      enum_values:
+        1: enabled
+        2: disabled
+    - name: dot1qPortGvrpFailedRegistrations
+      oid: 1.3.6.1.2.1.17.7.1.4.5.1.5
+      type: counter
+      help: The total number of failed GVRP registrations, for any reason, on this
+        port. - 1.3.6.1.2.1.17.7.1.4.5.1.5
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+    - name: dot1qPortGvrpLastPduOrigin
+      oid: 1.3.6.1.2.1.17.7.1.4.5.1.6
+      type: PhysAddress48
+      help: The Source MAC Address of the last GVRP message received on this port.
+        - 1.3.6.1.2.1.17.7.1.4.5.1.6
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+    - name: dot1qPortRestrictedVlanRegistration
+      oid: 1.3.6.1.2.1.17.7.1.4.5.1.7
+      type: gauge
+      help: The state of Restricted VLAN Registration on this port - 1.3.6.1.2.1.17.7.1.4.5.1.7
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      enum_values:
+        1: "true"
+        2: "false"
+    - name: dot1qTpVlanPortInFrames
+      oid: 1.3.6.1.2.1.17.7.1.4.6.1.1
+      type: counter
+      help: The number of valid frames received by this port from its segment that
+        were classified as belonging to this VLAN - 1.3.6.1.2.1.17.7.1.4.6.1.1
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qTpVlanPortOutFrames
+      oid: 1.3.6.1.2.1.17.7.1.4.6.1.2
+      type: counter
+      help: The number of valid frames transmitted by this port to its segment from
+        the local forwarding process for this VLAN - 1.3.6.1.2.1.17.7.1.4.6.1.2
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qTpVlanPortInDiscards
+      oid: 1.3.6.1.2.1.17.7.1.4.6.1.3
+      type: counter
+      help: The number of valid frames received by this port from its segment that
+        were classified as belonging to this VLAN and that were discarded due to VLAN-related
+        reasons - 1.3.6.1.2.1.17.7.1.4.6.1.3
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qTpVlanPortInOverflowFrames
+      oid: 1.3.6.1.2.1.17.7.1.4.6.1.4
+      type: counter
+      help: The number of times the associated dot1qTpVlanPortInFrames counter has
+        overflowed. - 1.3.6.1.2.1.17.7.1.4.6.1.4
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qTpVlanPortOutOverflowFrames
+      oid: 1.3.6.1.2.1.17.7.1.4.6.1.5
+      type: counter
+      help: The number of times the associated dot1qTpVlanPortOutFrames counter has
+        overflowed. - 1.3.6.1.2.1.17.7.1.4.6.1.5
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qTpVlanPortInOverflowDiscards
+      oid: 1.3.6.1.2.1.17.7.1.4.6.1.6
+      type: counter
+      help: The number of times the associated dot1qTpVlanPortInDiscards counter has
+        overflowed. - 1.3.6.1.2.1.17.7.1.4.6.1.6
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qTpVlanPortHCInFrames
+      oid: 1.3.6.1.2.1.17.7.1.4.7.1.1
+      type: counter
+      help: The number of valid frames received by this port from its segment that
+        were classified as belonging to this VLAN - 1.3.6.1.2.1.17.7.1.4.7.1.1
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qTpVlanPortHCOutFrames
+      oid: 1.3.6.1.2.1.17.7.1.4.7.1.2
+      type: counter
+      help: The number of valid frames transmitted by this port to its segment from
+        the local forwarding process for this VLAN - 1.3.6.1.2.1.17.7.1.4.7.1.2
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qTpVlanPortHCInDiscards
+      oid: 1.3.6.1.2.1.17.7.1.4.7.1.3
+      type: counter
+      help: The number of valid frames received by this port from its segment that
+        were classified as belonging to this VLAN and that were discarded due to VLAN-related
+        reasons - 1.3.6.1.2.1.17.7.1.4.7.1.3
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qConstraintVlan
+      oid: 1.3.6.1.2.1.17.7.1.4.8.1.1
+      type: gauge
+      help: The index of the row in dot1qVlanCurrentTable for the VLAN constrained
+        by this entry. - 1.3.6.1.2.1.17.7.1.4.8.1.1
+      indexes:
+      - labelname: dot1qConstraintVlan
+        type: gauge
+      - labelname: dot1qConstraintSet
+        type: gauge
+    - name: dot1qConstraintSet
+      oid: 1.3.6.1.2.1.17.7.1.4.8.1.2
+      type: gauge
+      help: The identity of the constraint set to which dot1qConstraintVlan belongs
+        - 1.3.6.1.2.1.17.7.1.4.8.1.2
+      indexes:
+      - labelname: dot1qConstraintVlan
+        type: gauge
+      - labelname: dot1qConstraintSet
+        type: gauge
+    - name: dot1qConstraintType
+      oid: 1.3.6.1.2.1.17.7.1.4.8.1.3
+      type: gauge
+      help: The type of constraint this entry defines - 1.3.6.1.2.1.17.7.1.4.8.1.3
+      indexes:
+      - labelname: dot1qConstraintVlan
+        type: gauge
+      - labelname: dot1qConstraintSet
+        type: gauge
+      enum_values:
+        1: independent
+        2: shared
+    - name: dot1qConstraintStatus
+      oid: 1.3.6.1.2.1.17.7.1.4.8.1.4
+      type: gauge
+      help: The status of this entry. - 1.3.6.1.2.1.17.7.1.4.8.1.4
+      indexes:
+      - labelname: dot1qConstraintVlan
+        type: gauge
+      - labelname: dot1qConstraintSet
+        type: gauge
+      enum_values:
+        1: active
+        2: notInService
+        3: notReady
+        4: createAndGo
+        5: createAndWait
+        6: destroy
+    - name: dot1qConstraintSetDefault
+      oid: 1.3.6.1.2.1.17.7.1.4.9
+      type: gauge
+      help: The identity of the constraint set to which a VLAN belongs, if there is
+        not an explicit entry for that VLAN in dot1qLearningConstraintsTable - 1.3.6.1.2.1.17.7.1.4.9
+    - name: dot1qConstraintTypeDefault
+      oid: 1.3.6.1.2.1.17.7.1.4.10
+      type: gauge
+      help: The type of constraint set to which a VLAN belongs, if there is not an
+        explicit entry for that VLAN in dot1qLearningConstraintsTable - 1.3.6.1.2.1.17.7.1.4.10
+      enum_values:
+        1: independent
+        2: shared
+    - name: dot1vProtocolTemplateFrameType
+      oid: 1.3.6.1.2.1.17.7.1.5.1.1.1
+      type: gauge
+      help: The data-link encapsulation format or the 'detagged_frame_type' in a Protocol
+        Template. - 1.3.6.1.2.1.17.7.1.5.1.1.1
+      indexes:
+      - labelname: dot1vProtocolTemplateFrameType
+        type: gauge
+        enum_values:
+          1: ethernet
+          2: rfc1042
+          3: snap8021H
+          4: snapOther
+          5: llcOther
+      - labelname: dot1vProtocolTemplateProtocolValue
+        type: OctetString
+      enum_values:
+        1: ethernet
+        2: rfc1042
+        3: snap8021H
+        4: snapOther
+        5: llcOther
+    - name: dot1vProtocolTemplateProtocolValue
+      oid: 1.3.6.1.2.1.17.7.1.5.1.1.2
+      type: OctetString
+      help: The identification of the protocol above the data-link layer in a Protocol
+        Template - 1.3.6.1.2.1.17.7.1.5.1.1.2
+      indexes:
+      - labelname: dot1vProtocolTemplateFrameType
+        type: gauge
+        enum_values:
+          1: ethernet
+          2: rfc1042
+          3: snap8021H
+          4: snapOther
+          5: llcOther
+      - labelname: dot1vProtocolTemplateProtocolValue
+        type: OctetString
+    - name: dot1vProtocolGroupId
+      oid: 1.3.6.1.2.1.17.7.1.5.1.1.3
+      type: gauge
+      help: Represents a group of protocols that are associated together when assigning
+        a VID to a frame. - 1.3.6.1.2.1.17.7.1.5.1.1.3
+      indexes:
+      - labelname: dot1vProtocolTemplateFrameType
+        type: gauge
+        enum_values:
+          1: ethernet
+          2: rfc1042
+          3: snap8021H
+          4: snapOther
+          5: llcOther
+      - labelname: dot1vProtocolTemplateProtocolValue
+        type: OctetString
+    - name: dot1vProtocolGroupRowStatus
+      oid: 1.3.6.1.2.1.17.7.1.5.1.1.4
+      type: gauge
+      help: This object indicates the status of this entry. - 1.3.6.1.2.1.17.7.1.5.1.1.4
+      indexes:
+      - labelname: dot1vProtocolTemplateFrameType
+        type: gauge
+        enum_values:
+          1: ethernet
+          2: rfc1042
+          3: snap8021H
+          4: snapOther
+          5: llcOther
+      - labelname: dot1vProtocolTemplateProtocolValue
+        type: OctetString
+      enum_values:
+        1: active
+        2: notInService
+        3: notReady
+        4: createAndGo
+        5: createAndWait
+        6: destroy
+    - name: dot1vProtocolPortGroupId
+      oid: 1.3.6.1.2.1.17.7.1.5.2.1.1
+      type: gauge
+      help: Designates a group of protocols in the Protocol Group Database. - 1.3.6.1.2.1.17.7.1.5.2.1.1
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1vProtocolPortGroupId
+        type: gauge
+    - name: dot1vProtocolPortGroupVid
+      oid: 1.3.6.1.2.1.17.7.1.5.2.1.2
+      type: gauge
+      help: The VID associated with a group of protocols for each port. - 1.3.6.1.2.1.17.7.1.5.2.1.2
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1vProtocolPortGroupId
+        type: gauge
+    - name: dot1vProtocolPortRowStatus
+      oid: 1.3.6.1.2.1.17.7.1.5.2.1.3
+      type: gauge
+      help: This object indicates the status of this entry. - 1.3.6.1.2.1.17.7.1.5.2.1.3
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1vProtocolPortGroupId
+        type: gauge
+      enum_values:
+        1: active
+        2: notInService
+        3: notReady
+        4: createAndGo
+        5: createAndWait
+        6: destroy
+  midgar_sw_entity:
+    walk:
+    - 1.3.6.1.2.1.47
+    metrics:
+    - name: entPhysicalIndex
+      oid: 1.3.6.1.2.1.47.1.1.1.1.1
+      type: gauge
+      help: The index for this entry. - 1.3.6.1.2.1.47.1.1.1.1.1
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entPhysicalDescr
+      oid: 1.3.6.1.2.1.47.1.1.1.1.2
+      type: DisplayString
+      help: A textual description of physical entity - 1.3.6.1.2.1.47.1.1.1.1.2
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entPhysicalVendorType
+      oid: 1.3.6.1.2.1.47.1.1.1.1.3
+      type: OctetString
+      help: An indication of the vendor-specific hardware type of the physical entity
+        - 1.3.6.1.2.1.47.1.1.1.1.3
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entPhysicalContainedIn
+      oid: 1.3.6.1.2.1.47.1.1.1.1.4
+      type: gauge
+      help: The value of entPhysicalIndex for the physical entity which 'contains'
+        this physical entity - 1.3.6.1.2.1.47.1.1.1.1.4
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entPhysicalClass
+      oid: 1.3.6.1.2.1.47.1.1.1.1.5
+      type: gauge
+      help: An indication of the general hardware type of the physical entity - 1.3.6.1.2.1.47.1.1.1.1.5
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+      enum_values:
+        1: other
+        2: unknown
+        3: chassis
+        4: backplane
+        5: container
+        6: powerSupply
+        7: fan
+        8: sensor
+        9: module
+        10: port
+        11: stack
+        12: cpu
+    - name: entPhysicalParentRelPos
+      oid: 1.3.6.1.2.1.47.1.1.1.1.6
+      type: gauge
+      help: An indication of the relative position of this 'child' component among
+        all its 'sibling' components - 1.3.6.1.2.1.47.1.1.1.1.6
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entPhysicalName
+      oid: 1.3.6.1.2.1.47.1.1.1.1.7
+      type: DisplayString
+      help: The textual name of the physical entity - 1.3.6.1.2.1.47.1.1.1.1.7
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entPhysicalHardwareRev
+      oid: 1.3.6.1.2.1.47.1.1.1.1.8
+      type: DisplayString
+      help: The vendor-specific hardware revision string for the physical entity -
+        1.3.6.1.2.1.47.1.1.1.1.8
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entPhysicalFirmwareRev
+      oid: 1.3.6.1.2.1.47.1.1.1.1.9
+      type: DisplayString
+      help: The vendor-specific firmware revision string for the physical entity -
+        1.3.6.1.2.1.47.1.1.1.1.9
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entPhysicalSoftwareRev
+      oid: 1.3.6.1.2.1.47.1.1.1.1.10
+      type: DisplayString
+      help: The vendor-specific software revision string for the physical entity -
+        1.3.6.1.2.1.47.1.1.1.1.10
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entPhysicalSerialNum
+      oid: 1.3.6.1.2.1.47.1.1.1.1.11
+      type: DisplayString
+      help: The vendor-specific serial number string for the physical entity - 1.3.6.1.2.1.47.1.1.1.1.11
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entPhysicalMfgName
+      oid: 1.3.6.1.2.1.47.1.1.1.1.12
+      type: DisplayString
+      help: The name of the manufacturer of this physical component - 1.3.6.1.2.1.47.1.1.1.1.12
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entPhysicalModelName
+      oid: 1.3.6.1.2.1.47.1.1.1.1.13
+      type: DisplayString
+      help: The vendor-specific model name identifier string associated with this
+        physical component - 1.3.6.1.2.1.47.1.1.1.1.13
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entPhysicalAlias
+      oid: 1.3.6.1.2.1.47.1.1.1.1.14
+      type: DisplayString
+      help: This object is an 'alias' name for the physical entity, as specified by
+        a network manager, and provides a non-volatile 'handle' for the physical entity
+        - 1.3.6.1.2.1.47.1.1.1.1.14
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entPhysicalAssetID
+      oid: 1.3.6.1.2.1.47.1.1.1.1.15
+      type: DisplayString
+      help: This object is a user-assigned asset tracking identifier (as specified
+        by a network manager) for the physical entity, and provides non-volatile storage
+        of this information - 1.3.6.1.2.1.47.1.1.1.1.15
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entPhysicalIsFRU
+      oid: 1.3.6.1.2.1.47.1.1.1.1.16
+      type: gauge
+      help: This object indicates whether or not this physical entity is considered
+        a 'field replaceable unit' by the vendor - 1.3.6.1.2.1.47.1.1.1.1.16
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+      enum_values:
+        1: "true"
+        2: "false"
+    - name: entPhysicalMfgDate
+      oid: 1.3.6.1.2.1.47.1.1.1.1.17
+      type: DateAndTime
+      help: This object contains the date of manufacturing of the managed entity -
+        1.3.6.1.2.1.47.1.1.1.1.17
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entPhysicalUris
+      oid: 1.3.6.1.2.1.47.1.1.1.1.18
+      type: OctetString
+      help: This object contains additional identification information about the physical
+        entity - 1.3.6.1.2.1.47.1.1.1.1.18
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entLogicalIndex
+      oid: 1.3.6.1.2.1.47.1.2.1.1.1
+      type: gauge
+      help: The value of this object uniquely identifies the logical entity - 1.3.6.1.2.1.47.1.2.1.1.1
+      indexes:
+      - labelname: entLogicalIndex
+        type: gauge
+    - name: entLogicalDescr
+      oid: 1.3.6.1.2.1.47.1.2.1.1.2
+      type: DisplayString
+      help: A textual description of the logical entity - 1.3.6.1.2.1.47.1.2.1.1.2
+      indexes:
+      - labelname: entLogicalIndex
+        type: gauge
+    - name: entLogicalType
+      oid: 1.3.6.1.2.1.47.1.2.1.1.3
+      type: OctetString
+      help: An indication of the type of logical entity - 1.3.6.1.2.1.47.1.2.1.1.3
+      indexes:
+      - labelname: entLogicalIndex
+        type: gauge
+    - name: entLogicalCommunity
+      oid: 1.3.6.1.2.1.47.1.2.1.1.4
+      type: OctetString
+      help: An SNMPv1 or SNMPv2C community-string, which can be used to access detailed
+        management information for this logical entity - 1.3.6.1.2.1.47.1.2.1.1.4
+      indexes:
+      - labelname: entLogicalIndex
+        type: gauge
+    - name: entLogicalTAddress
+      oid: 1.3.6.1.2.1.47.1.2.1.1.5
+      type: OctetString
+      help: The transport service address by which the logical entity receives network
+        management traffic, formatted according to the corresponding value of entLogicalTDomain
+        - 1.3.6.1.2.1.47.1.2.1.1.5
+      indexes:
+      - labelname: entLogicalIndex
+        type: gauge
+    - name: entLogicalTDomain
+      oid: 1.3.6.1.2.1.47.1.2.1.1.6
+      type: OctetString
+      help: Indicates the kind of transport service by which the logical entity receives
+        network management traffic - 1.3.6.1.2.1.47.1.2.1.1.6
+      indexes:
+      - labelname: entLogicalIndex
+        type: gauge
+    - name: entLogicalContextEngineID
+      oid: 1.3.6.1.2.1.47.1.2.1.1.7
+      type: OctetString
+      help: The authoritative contextEngineID that can be used to send an SNMP message
+        concerning information held by this logical entity, to the address specified
+        by the associated 'entLogicalTAddress/entLogicalTDomain' pair - 1.3.6.1.2.1.47.1.2.1.1.7
+      indexes:
+      - labelname: entLogicalIndex
+        type: gauge
+    - name: entLogicalContextName
+      oid: 1.3.6.1.2.1.47.1.2.1.1.8
+      type: DisplayString
+      help: The contextName that can be used to send an SNMP message concerning information
+        held by this logical entity, to the address specified by the associated 'entLogicalTAddress/entLogicalTDomain'
+        pair - 1.3.6.1.2.1.47.1.2.1.1.8
+      indexes:
+      - labelname: entLogicalIndex
+        type: gauge
+    - name: entLPPhysicalIndex
+      oid: 1.3.6.1.2.1.47.1.3.1.1.1
+      type: gauge
+      help: The value of this object identifies the index value of a particular entPhysicalEntry
+        associated with the indicated entLogicalEntity. - 1.3.6.1.2.1.47.1.3.1.1.1
+      indexes:
+      - labelname: entLogicalIndex
+        type: gauge
+      - labelname: entLPPhysicalIndex
+        type: gauge
+    - name: entAliasLogicalIndexOrZero
+      oid: 1.3.6.1.2.1.47.1.3.2.1.1
+      type: gauge
+      help: The value of this object identifies the logical entity that defines the
+        naming scope for the associated instance of the 'entAliasMappingIdentifier'
+        object - 1.3.6.1.2.1.47.1.3.2.1.1
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+      - labelname: entAliasLogicalIndexOrZero
+        type: gauge
+    - name: entAliasMappingIdentifier
+      oid: 1.3.6.1.2.1.47.1.3.2.1.2
+      type: OctetString
+      help: The value of this object identifies a particular conceptual row associated
+        with the indicated entPhysicalIndex and entLogicalIndex pair - 1.3.6.1.2.1.47.1.3.2.1.2
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+      - labelname: entAliasLogicalIndexOrZero
+        type: gauge
+    - name: entPhysicalChildIndex
+      oid: 1.3.6.1.2.1.47.1.3.3.1.1
+      type: gauge
+      help: The value of entPhysicalIndex for the contained physical entity. - 1.3.6.1.2.1.47.1.3.3.1.1
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+      - labelname: entPhysicalChildIndex
+        type: gauge
+    - name: entLastChangeTime
+      oid: 1.3.6.1.2.1.47.1.4.1
+      type: gauge
+      help: 'The value of sysUpTime at the time a conceptual row is created, modified,
+        or deleted in any of these tables: - entPhysicalTable - entLogicalTable -
+        entLPMappingTable - entAliasMappingTable - entPhysicalContainsTable - 1.3.6.1.2.1.47.1.4.1'
+  midgar_sw_entity_sensor:
+    walk:
+    - 1.3.6.1.2.1.99
+    metrics:
+    - name: entPhySensorType
+      oid: 1.3.6.1.2.1.99.1.1.1.1
+      type: gauge
+      help: The type of data returned by the associated entPhySensorValue object -
+        1.3.6.1.2.1.99.1.1.1.1
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+      enum_values:
+        1: other
+        2: unknown
+        3: voltsAC
+        4: voltsDC
+        5: amperes
+        6: watts
+        7: hertz
+        8: celsius
+        9: percentRH
+        10: rpm
+        11: cmm
+        12: truthvalue
+    - name: entPhySensorScale
+      oid: 1.3.6.1.2.1.99.1.1.1.2
+      type: gauge
+      help: The exponent to apply to values returned by the associated entPhySensorValue
+        object - 1.3.6.1.2.1.99.1.1.1.2
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+      enum_values:
+        1: yocto
+        2: zepto
+        3: atto
+        4: femto
+        5: pico
+        6: nano
+        7: micro
+        8: milli
+        9: units
+        10: kilo
+        11: mega
+        12: giga
+        13: tera
+        14: exa
+        15: peta
+        16: zetta
+        17: yotta
+    - name: entPhySensorPrecision
+      oid: 1.3.6.1.2.1.99.1.1.1.3
+      type: gauge
+      help: The number of decimal places of precision in fixed-point sensor values
+        returned by the associated entPhySensorValue object - 1.3.6.1.2.1.99.1.1.1.3
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entPhySensorValue
+      oid: 1.3.6.1.2.1.99.1.1.1.4
+      type: gauge
+      help: The most recent measurement obtained by the agent for this sensor - 1.3.6.1.2.1.99.1.1.1.4
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entPhySensorOperStatus
+      oid: 1.3.6.1.2.1.99.1.1.1.5
+      type: gauge
+      help: The operational status of the sensor. - 1.3.6.1.2.1.99.1.1.1.5
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+      enum_values:
+        1: ok
+        2: unavailable
+        3: nonoperational
+    - name: entPhySensorUnitsDisplay
+      oid: 1.3.6.1.2.1.99.1.1.1.6
+      type: DisplayString
+      help: A textual description of the data units that should be used in the display
+        of entPhySensorValue. - 1.3.6.1.2.1.99.1.1.1.6
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entPhySensorValueTimeStamp
+      oid: 1.3.6.1.2.1.99.1.1.1.7
+      type: gauge
+      help: The value of sysUpTime at the time the status and/or value of this sensor
+        was last obtained by the agent. - 1.3.6.1.2.1.99.1.1.1.7
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+    - name: entPhySensorValueUpdateRate
+      oid: 1.3.6.1.2.1.99.1.1.1.8
+      type: gauge
+      help: An indication of the frequency that the agent updates the associated entPhySensorValue
+        object, representing in milliseconds - 1.3.6.1.2.1.99.1.1.1.8
+      indexes:
+      - labelname: entPhysicalIndex
+        type: gauge
+  midgar_sw_lldp:
+    walk:
+    - 1.0.8802.1.1.2
+    metrics:
+    - name: lldpMessageTxInterval
+      oid: 1.0.8802.1.1.2.1.1.1
+      type: gauge
+      help: The interval at which LLDP frames are transmitted on behalf of this LLDP
+        agent - 1.0.8802.1.1.2.1.1.1
+    - name: lldpMessageTxHoldMultiplier
+      oid: 1.0.8802.1.1.2.1.1.2
+      type: gauge
+      help: The time-to-live value expressed as a multiple of the lldpMessageTxInterval
+        object - 1.0.8802.1.1.2.1.1.2
+    - name: lldpReinitDelay
+      oid: 1.0.8802.1.1.2.1.1.3
+      type: gauge
+      help: The lldpReinitDelay indicates the delay (in units of seconds) from when
+        lldpPortConfigAdminStatus object of a particular port becomes 'disabled' until
+        re-initialization will be attempted - 1.0.8802.1.1.2.1.1.3
+    - name: lldpTxDelay
+      oid: 1.0.8802.1.1.2.1.1.4
+      type: gauge
+      help: The lldpTxDelay indicates the delay (in units of seconds) between successive
+        LLDP frame transmissions initiated by value/status changes in the LLDP local
+        systems MIB - 1.0.8802.1.1.2.1.1.4
+    - name: lldpNotificationInterval
+      oid: 1.0.8802.1.1.2.1.1.5
+      type: gauge
+      help: This object controls the transmission of LLDP notifications - 1.0.8802.1.1.2.1.1.5
+    - name: lldpPortConfigPortNum
+      oid: 1.0.8802.1.1.2.1.1.6.1.1
+      type: gauge
+      help: The index value used to identify the port component (contained in the
+        local chassis with the LLDP agent) associated with this entry - 1.0.8802.1.1.2.1.1.6.1.1
+      indexes:
+      - labelname: lldpPortConfigPortNum
+        type: gauge
+    - name: lldpPortConfigAdminStatus
+      oid: 1.0.8802.1.1.2.1.1.6.1.2
+      type: gauge
+      help: The administratively desired status of the local LLDP agent - 1.0.8802.1.1.2.1.1.6.1.2
+      indexes:
+      - labelname: lldpPortConfigPortNum
+        type: gauge
+      enum_values:
+        1: txOnly
+        2: rxOnly
+        3: txAndRx
+        4: disabled
+    - name: lldpPortConfigNotificationEnable
+      oid: 1.0.8802.1.1.2.1.1.6.1.3
+      type: gauge
+      help: The lldpPortConfigNotificationEnable controls, on a per port basis, whether
+        or not notifications from the agent are enabled - 1.0.8802.1.1.2.1.1.6.1.3
+      indexes:
+      - labelname: lldpPortConfigPortNum
+        type: gauge
+      enum_values:
+        1: "true"
+        2: "false"
+    - name: lldpPortConfigTLVsTxEnable
+      oid: 1.0.8802.1.1.2.1.1.6.1.4
+      type: Bits
+      help: The lldpPortConfigTLVsTxEnable, defined as a bitmap, includes the basic
+        set of LLDP TLVs whose transmission is allowed on the local LLDP agent by
+        the network management - 1.0.8802.1.1.2.1.1.6.1.4
+      indexes:
+      - labelname: lldpPortConfigPortNum
+        type: gauge
+      enum_values:
+        0: portDesc
+        1: sysName
+        2: sysDesc
+        3: sysCap
+    - name: lldpConfigManAddrPortsTxEnable
+      oid: 1.0.8802.1.1.2.1.1.7.1.1
+      type: OctetString
+      help: A set of ports that are identified by a PortList, in which each port is
+        represented as a bit - 1.0.8802.1.1.2.1.1.7.1.1
+      indexes:
+      - labelname: lldpLocManAddrSubtype
+        type: gauge
+        enum_values:
+          0: other
+          1: ipV4
+          2: ipV6
+          3: nsap
+          4: hdlc
+          5: bbn1822
+          6: all802
+          7: e163
+          8: e164
+          9: f69
+          10: x121
+          11: ipx
+          12: appletalk
+          13: decnetIV
+          14: banyanVines
+          15: e164withNsap
+          16: dns
+          17: distinguishedname
+          18: asnumber
+          19: xtpoveripv4
+          20: xtpoveripv6
+          21: xtpnativemodextp
+          65535: reserved
+      - labelname: lldpLocManAddr
+        type: OctetString
+    - name: lldpStatsRemTablesLastChangeTime
+      oid: 1.0.8802.1.1.2.1.2.1
+      type: gauge
+      help: The value of sysUpTime object (defined in IETF RFC 3418) at the time an
+        entry is created, modified, or deleted in the in tables associated with the
+        lldpRemoteSystemsData objects and all LLDP extension objects associated with
+        remote systems - 1.0.8802.1.1.2.1.2.1
+    - name: lldpStatsRemTablesInserts
+      oid: 1.0.8802.1.1.2.1.2.2
+      type: gauge
+      help: The number of times the complete set of information advertised by a particular
+        MSAP has been inserted into tables contained in lldpRemoteSystemsData and
+        lldpExtensions objects - 1.0.8802.1.1.2.1.2.2
+    - name: lldpStatsRemTablesDeletes
+      oid: 1.0.8802.1.1.2.1.2.3
+      type: gauge
+      help: The number of times the complete set of information advertised by a particular
+        MSAP has been deleted from tables contained in lldpRemoteSystemsData and lldpExtensions
+        objects - 1.0.8802.1.1.2.1.2.3
+    - name: lldpStatsRemTablesDrops
+      oid: 1.0.8802.1.1.2.1.2.4
+      type: gauge
+      help: The number of times the complete set of information advertised by a particular
+        MSAP could not be entered into tables contained in lldpRemoteSystemsData and
+        lldpExtensions objects because of insufficient resources. - 1.0.8802.1.1.2.1.2.4
+    - name: lldpStatsRemTablesAgeouts
+      oid: 1.0.8802.1.1.2.1.2.5
+      type: gauge
+      help: The number of times the complete set of information advertised by a particular
+        MSAP has been deleted from tables contained in lldpRemoteSystemsData and lldpExtensions
+        objects because the information timeliness interval has expired - 1.0.8802.1.1.2.1.2.5
+    - name: lldpStatsTxPortNum
+      oid: 1.0.8802.1.1.2.1.2.6.1.1
+      type: gauge
+      help: The index value used to identify the port component (contained in the
+        local chassis with the LLDP agent) associated with this entry - 1.0.8802.1.1.2.1.2.6.1.1
+      indexes:
+      - labelname: lldpStatsTxPortNum
+        type: gauge
+    - name: lldpStatsTxPortFramesTotal
+      oid: 1.0.8802.1.1.2.1.2.6.1.2
+      type: counter
+      help: The number of LLDP frames transmitted by this LLDP agent on the indicated
+        port. - 1.0.8802.1.1.2.1.2.6.1.2
+      indexes:
+      - labelname: lldpStatsTxPortNum
+        type: gauge
+    - name: lldpStatsRxPortNum
+      oid: 1.0.8802.1.1.2.1.2.7.1.1
+      type: gauge
+      help: The index value used to identify the port component (contained in the
+        local chassis with the LLDP agent) associated with this entry - 1.0.8802.1.1.2.1.2.7.1.1
+      indexes:
+      - labelname: lldpStatsRxPortNum
+        type: gauge
+    - name: lldpStatsRxPortFramesDiscardedTotal
+      oid: 1.0.8802.1.1.2.1.2.7.1.2
+      type: counter
+      help: The number of LLDP frames received by this LLDP agent on the indicated
+        port, and then discarded for any reason - 1.0.8802.1.1.2.1.2.7.1.2
+      indexes:
+      - labelname: lldpStatsRxPortNum
+        type: gauge
+    - name: lldpStatsRxPortFramesErrors
+      oid: 1.0.8802.1.1.2.1.2.7.1.3
+      type: counter
+      help: The number of invalid LLDP frames received by this LLDP agent on the indicated
+        port, while this LLDP agent is enabled. - 1.0.8802.1.1.2.1.2.7.1.3
+      indexes:
+      - labelname: lldpStatsRxPortNum
+        type: gauge
+    - name: lldpStatsRxPortFramesTotal
+      oid: 1.0.8802.1.1.2.1.2.7.1.4
+      type: counter
+      help: The number of valid LLDP frames received by this LLDP agent on the indicated
+        port, while this LLDP agent is enabled. - 1.0.8802.1.1.2.1.2.7.1.4
+      indexes:
+      - labelname: lldpStatsRxPortNum
+        type: gauge
+    - name: lldpStatsRxPortTLVsDiscardedTotal
+      oid: 1.0.8802.1.1.2.1.2.7.1.5
+      type: counter
+      help: The number of LLDP TLVs discarded for any reason by this LLDP agent on
+        the indicated port. - 1.0.8802.1.1.2.1.2.7.1.5
+      indexes:
+      - labelname: lldpStatsRxPortNum
+        type: gauge
+    - name: lldpStatsRxPortTLVsUnrecognizedTotal
+      oid: 1.0.8802.1.1.2.1.2.7.1.6
+      type: counter
+      help: The number of LLDP TLVs received on the given port that are not recognized
+        by this LLDP agent on the indicated port - 1.0.8802.1.1.2.1.2.7.1.6
+      indexes:
+      - labelname: lldpStatsRxPortNum
+        type: gauge
+    - name: lldpStatsRxPortAgeoutsTotal
+      oid: 1.0.8802.1.1.2.1.2.7.1.7
+      type: gauge
+      help: The counter that represents the number of age-outs that occurred on a
+        given port - 1.0.8802.1.1.2.1.2.7.1.7
+      indexes:
+      - labelname: lldpStatsRxPortNum
+        type: gauge
+    - name: lldpLocChassisIdSubtype
+      oid: 1.0.8802.1.1.2.1.3.1
+      type: gauge
+      help: The type of encoding used to identify the chassis associated with the
+        local system. - 1.0.8802.1.1.2.1.3.1
+      enum_values:
+        1: chassisComponent
+        2: interfaceAlias
+        3: portComponent
+        4: macAddress
+        5: networkAddress
+        6: interfaceName
+        7: local
+    - name: lldpLocChassisId
+      oid: 1.0.8802.1.1.2.1.3.2
+      type: OctetString
+      help: The string value used to identify the chassis component associated with
+        the local system. - 1.0.8802.1.1.2.1.3.2
+    - name: lldpLocSysName
+      oid: 1.0.8802.1.1.2.1.3.3
+      type: DisplayString
+      help: The string value used to identify the system name of the local system
+        - 1.0.8802.1.1.2.1.3.3
+    - name: lldpLocSysDesc
+      oid: 1.0.8802.1.1.2.1.3.4
+      type: DisplayString
+      help: The string value used to identify the system description of the local
+        system - 1.0.8802.1.1.2.1.3.4
+    - name: lldpLocSysCapSupported
+      oid: 1.0.8802.1.1.2.1.3.5
+      type: Bits
+      help: The bitmap value used to identify which system capabilities are supported
+        on the local system. - 1.0.8802.1.1.2.1.3.5
+      enum_values:
+        0: other
+        1: repeater
+        2: bridge
+        3: wlanAccessPoint
+        4: router
+        5: telephone
+        6: docsisCableDevice
+        7: stationOnly
+    - name: lldpLocSysCapEnabled
+      oid: 1.0.8802.1.1.2.1.3.6
+      type: Bits
+      help: The bitmap value used to identify which system capabilities are enabled
+        on the local system. - 1.0.8802.1.1.2.1.3.6
+      enum_values:
+        0: other
+        1: repeater
+        2: bridge
+        3: wlanAccessPoint
+        4: router
+        5: telephone
+        6: docsisCableDevice
+        7: stationOnly
+    - name: lldpLocPortNum
+      oid: 1.0.8802.1.1.2.1.3.7.1.1
+      type: gauge
+      help: The index value used to identify the port component (contained in the
+        local chassis with the LLDP agent) associated with this entry - 1.0.8802.1.1.2.1.3.7.1.1
+      indexes:
+      - labelname: lldpLocPortNum
+        type: gauge
+    - name: lldpLocPortIdSubtype
+      oid: 1.0.8802.1.1.2.1.3.7.1.2
+      type: gauge
+      help: The type of port identifier encoding used in the associated 'lldpLocPortId'
+        object. - 1.0.8802.1.1.2.1.3.7.1.2
+      indexes:
+      - labelname: lldpLocPortNum
+        type: gauge
+      enum_values:
+        1: interfaceAlias
+        2: portComponent
+        3: macAddress
+        4: networkAddress
+        5: interfaceName
+        6: agentCircuitId
+        7: local
+    - name: lldpLocPortId
+      oid: 1.0.8802.1.1.2.1.3.7.1.3
+      type: LldpPortId
+      help: The string value used to identify the port component associated with a
+        given port in the local system. - 1.0.8802.1.1.2.1.3.7.1.3
+      indexes:
+      - labelname: lldpLocPortNum
+        type: gauge
+    - name: lldpLocPortDesc
+      oid: 1.0.8802.1.1.2.1.3.7.1.4
+      type: DisplayString
+      help: The string value used to identify the 802 LAN station's port description
+        associated with the local system - 1.0.8802.1.1.2.1.3.7.1.4
+      indexes:
+      - labelname: lldpLocPortNum
+        type: gauge
+    - name: lldpLocManAddrSubtype
+      oid: 1.0.8802.1.1.2.1.3.8.1.1
+      type: gauge
+      help: The type of management address identifier encoding used in the associated
+        'lldpLocManagmentAddr' object. - 1.0.8802.1.1.2.1.3.8.1.1
+      indexes:
+      - labelname: lldpLocManAddrSubtype
+        type: gauge
+        enum_values:
+          0: other
+          1: ipV4
+          2: ipV6
+          3: nsap
+          4: hdlc
+          5: bbn1822
+          6: all802
+          7: e163
+          8: e164
+          9: f69
+          10: x121
+          11: ipx
+          12: appletalk
+          13: decnetIV
+          14: banyanVines
+          15: e164withNsap
+          16: dns
+          17: distinguishedname
+          18: asnumber
+          19: xtpoveripv4
+          20: xtpoveripv6
+          21: xtpnativemodextp
+          65535: reserved
+      - labelname: lldpLocManAddr
+        type: OctetString
+      enum_values:
+        0: other
+        1: ipV4
+        2: ipV6
+        3: nsap
+        4: hdlc
+        5: bbn1822
+        6: all802
+        7: e163
+        8: e164
+        9: f69
+        10: x121
+        11: ipx
+        12: appletalk
+        13: decnetIV
+        14: banyanVines
+        15: e164withNsap
+        16: dns
+        17: distinguishedname
+        18: asnumber
+        19: xtpoveripv4
+        20: xtpoveripv6
+        21: xtpnativemodextp
+        65535: reserved
+    - name: lldpLocManAddr
+      oid: 1.0.8802.1.1.2.1.3.8.1.2
+      type: OctetString
+      help: The string value used to identify the management address component associated
+        with the local system - 1.0.8802.1.1.2.1.3.8.1.2
+      indexes:
+      - labelname: lldpLocManAddrSubtype
+        type: gauge
+        enum_values:
+          0: other
+          1: ipV4
+          2: ipV6
+          3: nsap
+          4: hdlc
+          5: bbn1822
+          6: all802
+          7: e163
+          8: e164
+          9: f69
+          10: x121
+          11: ipx
+          12: appletalk
+          13: decnetIV
+          14: banyanVines
+          15: e164withNsap
+          16: dns
+          17: distinguishedname
+          18: asnumber
+          19: xtpoveripv4
+          20: xtpoveripv6
+          21: xtpnativemodextp
+          65535: reserved
+      - labelname: lldpLocManAddr
+        type: OctetString
+    - name: lldpLocManAddrLen
+      oid: 1.0.8802.1.1.2.1.3.8.1.3
+      type: gauge
+      help: The total length of the management address subtype and the management
+        address fields in LLDPDUs transmitted by the local LLDP agent - 1.0.8802.1.1.2.1.3.8.1.3
+      indexes:
+      - labelname: lldpLocManAddrSubtype
+        type: gauge
+        enum_values:
+          0: other
+          1: ipV4
+          2: ipV6
+          3: nsap
+          4: hdlc
+          5: bbn1822
+          6: all802
+          7: e163
+          8: e164
+          9: f69
+          10: x121
+          11: ipx
+          12: appletalk
+          13: decnetIV
+          14: banyanVines
+          15: e164withNsap
+          16: dns
+          17: distinguishedname
+          18: asnumber
+          19: xtpoveripv4
+          20: xtpoveripv6
+          21: xtpnativemodextp
+          65535: reserved
+      - labelname: lldpLocManAddr
+        type: OctetString
+    - name: lldpLocManAddrIfSubtype
+      oid: 1.0.8802.1.1.2.1.3.8.1.4
+      type: gauge
+      help: The enumeration value that identifies the interface numbering method used
+        for defining the interface number, associated with the local system. - 1.0.8802.1.1.2.1.3.8.1.4
+      indexes:
+      - labelname: lldpLocManAddrSubtype
+        type: gauge
+        enum_values:
+          0: other
+          1: ipV4
+          2: ipV6
+          3: nsap
+          4: hdlc
+          5: bbn1822
+          6: all802
+          7: e163
+          8: e164
+          9: f69
+          10: x121
+          11: ipx
+          12: appletalk
+          13: decnetIV
+          14: banyanVines
+          15: e164withNsap
+          16: dns
+          17: distinguishedname
+          18: asnumber
+          19: xtpoveripv4
+          20: xtpoveripv6
+          21: xtpnativemodextp
+          65535: reserved
+      - labelname: lldpLocManAddr
+        type: OctetString
+      enum_values:
+        1: unknown
+        2: ifIndex
+        3: systemPortNumber
+    - name: lldpLocManAddrIfId
+      oid: 1.0.8802.1.1.2.1.3.8.1.5
+      type: gauge
+      help: The integer value used to identify the interface number regarding the
+        management address component associated with the local system. - 1.0.8802.1.1.2.1.3.8.1.5
+      indexes:
+      - labelname: lldpLocManAddrSubtype
+        type: gauge
+        enum_values:
+          0: other
+          1: ipV4
+          2: ipV6
+          3: nsap
+          4: hdlc
+          5: bbn1822
+          6: all802
+          7: e163
+          8: e164
+          9: f69
+          10: x121
+          11: ipx
+          12: appletalk
+          13: decnetIV
+          14: banyanVines
+          15: e164withNsap
+          16: dns
+          17: distinguishedname
+          18: asnumber
+          19: xtpoveripv4
+          20: xtpoveripv6
+          21: xtpnativemodextp
+          65535: reserved
+      - labelname: lldpLocManAddr
+        type: OctetString
+    - name: lldpLocManAddrOID
+      oid: 1.0.8802.1.1.2.1.3.8.1.6
+      type: OctetString
+      help: The OID value used to identify the type of hardware component or protocol
+        entity associated with the management address advertised by the local system
+        agent. - 1.0.8802.1.1.2.1.3.8.1.6
+      indexes:
+      - labelname: lldpLocManAddrSubtype
+        type: gauge
+        enum_values:
+          0: other
+          1: ipV4
+          2: ipV6
+          3: nsap
+          4: hdlc
+          5: bbn1822
+          6: all802
+          7: e163
+          8: e164
+          9: f69
+          10: x121
+          11: ipx
+          12: appletalk
+          13: decnetIV
+          14: banyanVines
+          15: e164withNsap
+          16: dns
+          17: distinguishedname
+          18: asnumber
+          19: xtpoveripv4
+          20: xtpoveripv6
+          21: xtpnativemodextp
+          65535: reserved
+      - labelname: lldpLocManAddr
+        type: OctetString
+    - name: lldpRemTimeMark
+      oid: 1.0.8802.1.1.2.1.4.1.1.1
+      type: gauge
+      help: A TimeFilter for this entry - 1.0.8802.1.1.2.1.4.1.1.1
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+    - name: lldpRemLocalPortNum
+      oid: 1.0.8802.1.1.2.1.4.1.1.2
+      type: gauge
+      help: The index value used to identify the port component (contained in the
+        local chassis with the LLDP agent) associated with this entry - 1.0.8802.1.1.2.1.4.1.1.2
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+    - name: lldpRemIndex
+      oid: 1.0.8802.1.1.2.1.4.1.1.3
+      type: gauge
+      help: This object represents an arbitrary local integer value used by this agent
+        to identify a particular connection instance, unique only for the indicated
+        remote system - 1.0.8802.1.1.2.1.4.1.1.3
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+    - name: lldpRemChassisIdSubtype
+      oid: 1.0.8802.1.1.2.1.4.1.1.4
+      type: gauge
+      help: The type of encoding used to identify the chassis associated with the
+        remote system. - 1.0.8802.1.1.2.1.4.1.1.4
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+      enum_values:
+        1: chassisComponent
+        2: interfaceAlias
+        3: portComponent
+        4: macAddress
+        5: networkAddress
+        6: interfaceName
+        7: local
+    - name: lldpRemChassisId
+      oid: 1.0.8802.1.1.2.1.4.1.1.5
+      type: OctetString
+      help: The string value used to identify the chassis component associated with
+        the remote system. - 1.0.8802.1.1.2.1.4.1.1.5
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+    - name: lldpRemPortIdSubtype
+      oid: 1.0.8802.1.1.2.1.4.1.1.6
+      type: gauge
+      help: The type of port identifier encoding used in the associated 'lldpRemPortId'
+        object. - 1.0.8802.1.1.2.1.4.1.1.6
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+      enum_values:
+        1: interfaceAlias
+        2: portComponent
+        3: macAddress
+        4: networkAddress
+        5: interfaceName
+        6: agentCircuitId
+        7: local
+    - name: lldpRemPortId
+      oid: 1.0.8802.1.1.2.1.4.1.1.7
+      type: LldpPortId
+      help: The string value used to identify the port component associated with the
+        remote system. - 1.0.8802.1.1.2.1.4.1.1.7
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+    - name: lldpRemPortDesc
+      oid: 1.0.8802.1.1.2.1.4.1.1.8
+      type: DisplayString
+      help: The string value used to identify the description of the given port associated
+        with the remote system. - 1.0.8802.1.1.2.1.4.1.1.8
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+    - name: lldpRemSysName
+      oid: 1.0.8802.1.1.2.1.4.1.1.9
+      type: DisplayString
+      help: The string value used to identify the system name of the remote system.
+        - 1.0.8802.1.1.2.1.4.1.1.9
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+    - name: lldpRemSysDesc
+      oid: 1.0.8802.1.1.2.1.4.1.1.10
+      type: DisplayString
+      help: The string value used to identify the system description of the remote
+        system. - 1.0.8802.1.1.2.1.4.1.1.10
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+    - name: lldpRemSysCapSupported
+      oid: 1.0.8802.1.1.2.1.4.1.1.11
+      type: Bits
+      help: The bitmap value used to identify which system capabilities are supported
+        on the remote system. - 1.0.8802.1.1.2.1.4.1.1.11
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+      enum_values:
+        0: other
+        1: repeater
+        2: bridge
+        3: wlanAccessPoint
+        4: router
+        5: telephone
+        6: docsisCableDevice
+        7: stationOnly
+    - name: lldpRemSysCapEnabled
+      oid: 1.0.8802.1.1.2.1.4.1.1.12
+      type: Bits
+      help: The bitmap value used to identify which system capabilities are enabled
+        on the remote system. - 1.0.8802.1.1.2.1.4.1.1.12
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+      enum_values:
+        0: other
+        1: repeater
+        2: bridge
+        3: wlanAccessPoint
+        4: router
+        5: telephone
+        6: docsisCableDevice
+        7: stationOnly
+    - name: lldpRemManAddrSubtype
+      oid: 1.0.8802.1.1.2.1.4.2.1.1
+      type: gauge
+      help: The type of management address identifier encoding used in the associated
+        'lldpRemManagmentAddr' object. - 1.0.8802.1.1.2.1.4.2.1.1
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+      - labelname: lldpRemManAddrSubtype
+        type: gauge
+        enum_values:
+          0: other
+          1: ipV4
+          2: ipV6
+          3: nsap
+          4: hdlc
+          5: bbn1822
+          6: all802
+          7: e163
+          8: e164
+          9: f69
+          10: x121
+          11: ipx
+          12: appletalk
+          13: decnetIV
+          14: banyanVines
+          15: e164withNsap
+          16: dns
+          17: distinguishedname
+          18: asnumber
+          19: xtpoveripv4
+          20: xtpoveripv6
+          21: xtpnativemodextp
+          65535: reserved
+      - labelname: lldpRemManAddr
+        type: OctetString
+      enum_values:
+        0: other
+        1: ipV4
+        2: ipV6
+        3: nsap
+        4: hdlc
+        5: bbn1822
+        6: all802
+        7: e163
+        8: e164
+        9: f69
+        10: x121
+        11: ipx
+        12: appletalk
+        13: decnetIV
+        14: banyanVines
+        15: e164withNsap
+        16: dns
+        17: distinguishedname
+        18: asnumber
+        19: xtpoveripv4
+        20: xtpoveripv6
+        21: xtpnativemodextp
+        65535: reserved
+    - name: lldpRemManAddr
+      oid: 1.0.8802.1.1.2.1.4.2.1.2
+      type: OctetString
+      help: The string value used to identify the management address component associated
+        with the remote system - 1.0.8802.1.1.2.1.4.2.1.2
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+      - labelname: lldpRemManAddrSubtype
+        type: gauge
+        enum_values:
+          0: other
+          1: ipV4
+          2: ipV6
+          3: nsap
+          4: hdlc
+          5: bbn1822
+          6: all802
+          7: e163
+          8: e164
+          9: f69
+          10: x121
+          11: ipx
+          12: appletalk
+          13: decnetIV
+          14: banyanVines
+          15: e164withNsap
+          16: dns
+          17: distinguishedname
+          18: asnumber
+          19: xtpoveripv4
+          20: xtpoveripv6
+          21: xtpnativemodextp
+          65535: reserved
+      - labelname: lldpRemManAddr
+        type: OctetString
+    - name: lldpRemManAddrIfSubtype
+      oid: 1.0.8802.1.1.2.1.4.2.1.3
+      type: gauge
+      help: The enumeration value that identifies the interface numbering method used
+        for defining the interface number, associated with the remote system. - 1.0.8802.1.1.2.1.4.2.1.3
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+      - labelname: lldpRemManAddrSubtype
+        type: gauge
+        enum_values:
+          0: other
+          1: ipV4
+          2: ipV6
+          3: nsap
+          4: hdlc
+          5: bbn1822
+          6: all802
+          7: e163
+          8: e164
+          9: f69
+          10: x121
+          11: ipx
+          12: appletalk
+          13: decnetIV
+          14: banyanVines
+          15: e164withNsap
+          16: dns
+          17: distinguishedname
+          18: asnumber
+          19: xtpoveripv4
+          20: xtpoveripv6
+          21: xtpnativemodextp
+          65535: reserved
+      - labelname: lldpRemManAddr
+        type: OctetString
+      enum_values:
+        1: unknown
+        2: ifIndex
+        3: systemPortNumber
+    - name: lldpRemManAddrIfId
+      oid: 1.0.8802.1.1.2.1.4.2.1.4
+      type: gauge
+      help: The integer value used to identify the interface number regarding the
+        management address component associated with the remote system. - 1.0.8802.1.1.2.1.4.2.1.4
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+      - labelname: lldpRemManAddrSubtype
+        type: gauge
+        enum_values:
+          0: other
+          1: ipV4
+          2: ipV6
+          3: nsap
+          4: hdlc
+          5: bbn1822
+          6: all802
+          7: e163
+          8: e164
+          9: f69
+          10: x121
+          11: ipx
+          12: appletalk
+          13: decnetIV
+          14: banyanVines
+          15: e164withNsap
+          16: dns
+          17: distinguishedname
+          18: asnumber
+          19: xtpoveripv4
+          20: xtpoveripv6
+          21: xtpnativemodextp
+          65535: reserved
+      - labelname: lldpRemManAddr
+        type: OctetString
+    - name: lldpRemManAddrOID
+      oid: 1.0.8802.1.1.2.1.4.2.1.5
+      type: OctetString
+      help: The OID value used to identify the type of hardware component or protocol
+        entity associated with the management address advertised by the remote system
+        agent. - 1.0.8802.1.1.2.1.4.2.1.5
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+      - labelname: lldpRemManAddrSubtype
+        type: gauge
+        enum_values:
+          0: other
+          1: ipV4
+          2: ipV6
+          3: nsap
+          4: hdlc
+          5: bbn1822
+          6: all802
+          7: e163
+          8: e164
+          9: f69
+          10: x121
+          11: ipx
+          12: appletalk
+          13: decnetIV
+          14: banyanVines
+          15: e164withNsap
+          16: dns
+          17: distinguishedname
+          18: asnumber
+          19: xtpoveripv4
+          20: xtpoveripv6
+          21: xtpnativemodextp
+          65535: reserved
+      - labelname: lldpRemManAddr
+        type: OctetString
+    - name: lldpRemUnknownTLVType
+      oid: 1.0.8802.1.1.2.1.4.3.1.1
+      type: gauge
+      help: This object represents the value extracted from the type field of the
+        TLV. - 1.0.8802.1.1.2.1.4.3.1.1
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+      - labelname: lldpRemUnknownTLVType
+        type: gauge
+    - name: lldpRemUnknownTLVInfo
+      oid: 1.0.8802.1.1.2.1.4.3.1.2
+      type: OctetString
+      help: This object represents the value extracted from the value field of the
+        TLV. - 1.0.8802.1.1.2.1.4.3.1.2
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+      - labelname: lldpRemUnknownTLVType
+        type: gauge
+    - name: lldpRemOrgDefInfoOUI
+      oid: 1.0.8802.1.1.2.1.4.4.1.1
+      type: OctetString
+      help: The Organizationally Unique Identifier (OUI), as defined in IEEE std 802-2001,
+        is a 24 bit (three octets) globally unique assigned number referenced by various
+        standards, of the information received from the remote system. - 1.0.8802.1.1.2.1.4.4.1.1
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+      - labelname: lldpRemOrgDefInfoOUI
+        type: OctetString
+      - labelname: lldpRemOrgDefInfoSubtype
+        type: gauge
+      - labelname: lldpRemOrgDefInfoIndex
+        type: gauge
+    - name: lldpRemOrgDefInfoSubtype
+      oid: 1.0.8802.1.1.2.1.4.4.1.2
+      type: gauge
+      help: The integer value used to identify the subtype of the organizationally
+        defined information received from the remote system - 1.0.8802.1.1.2.1.4.4.1.2
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+      - labelname: lldpRemOrgDefInfoOUI
+        type: OctetString
+      - labelname: lldpRemOrgDefInfoSubtype
+        type: gauge
+      - labelname: lldpRemOrgDefInfoIndex
+        type: gauge
+    - name: lldpRemOrgDefInfoIndex
+      oid: 1.0.8802.1.1.2.1.4.4.1.3
+      type: gauge
+      help: This object represents an arbitrary local integer value used by this agent
+        to identify a particular unrecognized organizationally defined information
+        instance, unique only for the lldpRemOrgDefInfoOUI and lldpRemOrgDefInfoSubtype
+        from the same remote system - 1.0.8802.1.1.2.1.4.4.1.3
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+      - labelname: lldpRemOrgDefInfoOUI
+        type: OctetString
+      - labelname: lldpRemOrgDefInfoSubtype
+        type: gauge
+      - labelname: lldpRemOrgDefInfoIndex
+        type: gauge
+    - name: lldpRemOrgDefInfo
+      oid: 1.0.8802.1.1.2.1.4.4.1.4
+      type: OctetString
+      help: The string value used to identify the organizationally defined information
+        of the remote system - 1.0.8802.1.1.2.1.4.4.1.4
+      indexes:
+      - labelname: lldpRemTimeMark
+        type: gauge
+      - labelname: lldpRemLocalPortNum
+        type: gauge
+      - labelname: lldpRemIndex
+        type: gauge
+      - labelname: lldpRemOrgDefInfoOUI
+        type: OctetString
+      - labelname: lldpRemOrgDefInfoSubtype
+        type: gauge
+      - labelname: lldpRemOrgDefInfoIndex
+        type: gauge
+  midgar_sw_poe:
+    walk:
+    - 1.3.6.1.2.1.105
+    metrics:
+    - name: pethPsePortGroupIndex
+      oid: 1.3.6.1.2.1.105.1.1.1.1
+      type: gauge
+      help: This variable uniquely identifies the group containing the port to which
+        a power Ethernet PSE is connected - 1.3.6.1.2.1.105.1.1.1.1
+      indexes:
+      - labelname: pethPsePortGroupIndex
+        type: gauge
+      - labelname: pethPsePortIndex
+        type: gauge
+    - name: pethPsePortIndex
+      oid: 1.3.6.1.2.1.105.1.1.1.2
+      type: gauge
+      help: This variable uniquely identifies the power Ethernet PSE port within group
+        pethPsePortGroupIndex to which the power Ethernet PSE entry is connected.
+        - 1.3.6.1.2.1.105.1.1.1.2
+      indexes:
+      - labelname: pethPsePortGroupIndex
+        type: gauge
+      - labelname: pethPsePortIndex
+        type: gauge
+    - name: pethPsePortAdminEnable
+      oid: 1.3.6.1.2.1.105.1.1.1.3
+      type: gauge
+      help: true (1) An interface which can provide the PSE functions - 1.3.6.1.2.1.105.1.1.1.3
+      indexes:
+      - labelname: pethPsePortGroupIndex
+        type: gauge
+      - labelname: pethPsePortIndex
+        type: gauge
+      enum_values:
+        1: "true"
+        2: "false"
+    - name: pethPsePortPowerPairsControlAbility
+      oid: 1.3.6.1.2.1.105.1.1.1.4
+      type: gauge
+      help: Describes the capability of controlling the power pairs functionality
+        to switch pins for sourcing power - 1.3.6.1.2.1.105.1.1.1.4
+      indexes:
+      - labelname: pethPsePortGroupIndex
+        type: gauge
+      - labelname: pethPsePortIndex
+        type: gauge
+      enum_values:
+        1: "true"
+        2: "false"
+    - name: pethPsePortPowerPairs
+      oid: 1.3.6.1.2.1.105.1.1.1.5
+      type: gauge
+      help: Describes or controls the pairs in use - 1.3.6.1.2.1.105.1.1.1.5
+      indexes:
+      - labelname: pethPsePortGroupIndex
+        type: gauge
+      - labelname: pethPsePortIndex
+        type: gauge
+      enum_values:
+        1: signal
+        2: spare
+    - name: pethPsePortDetectionStatus
+      oid: 1.3.6.1.2.1.105.1.1.1.6
+      type: gauge
+      help: Describes the operational status of the port PD detection - 1.3.6.1.2.1.105.1.1.1.6
+      indexes:
+      - labelname: pethPsePortGroupIndex
+        type: gauge
+      - labelname: pethPsePortIndex
+        type: gauge
+      enum_values:
+        1: disabled
+        2: searching
+        3: deliveringPower
+        4: fault
+        5: test
+        6: otherFault
+    - name: pethPsePortPowerPriority
+      oid: 1.3.6.1.2.1.105.1.1.1.7
+      type: gauge
+      help: This object controls the priority of the port from the point of view of
+        a power management algorithm - 1.3.6.1.2.1.105.1.1.1.7
+      indexes:
+      - labelname: pethPsePortGroupIndex
+        type: gauge
+      - labelname: pethPsePortIndex
+        type: gauge
+      enum_values:
+        1: critical
+        2: high
+        3: low
+    - name: pethPsePortMPSAbsentCounter
+      oid: 1.3.6.1.2.1.105.1.1.1.8
+      type: counter
+      help: This counter is incremented when the PSE state diagram transitions directly
+        from the state POWER_ON to the state IDLE due to tmpdo_timer_done being asserted.
+        - 1.3.6.1.2.1.105.1.1.1.8
+      indexes:
+      - labelname: pethPsePortGroupIndex
+        type: gauge
+      - labelname: pethPsePortIndex
+        type: gauge
+    - name: pethPsePortType
+      oid: 1.3.6.1.2.1.105.1.1.1.9
+      type: DisplayString
+      help: A manager will set the value of this variable to indicate the type of
+        powered device that is connected to the port - 1.3.6.1.2.1.105.1.1.1.9
+      indexes:
+      - labelname: pethPsePortGroupIndex
+        type: gauge
+      - labelname: pethPsePortIndex
+        type: gauge
+    - name: pethPsePortPowerClassifications
+      oid: 1.3.6.1.2.1.105.1.1.1.10
+      type: gauge
+      help: Classification is a way to tag different terminals on the Power over LAN
+        network according to their power consumption - 1.3.6.1.2.1.105.1.1.1.10
+      indexes:
+      - labelname: pethPsePortGroupIndex
+        type: gauge
+      - labelname: pethPsePortIndex
+        type: gauge
+      enum_values:
+        1: class0
+        2: class1
+        3: class2
+        4: class3
+        5: class4
+    - name: pethPsePortInvalidSignatureCounter
+      oid: 1.3.6.1.2.1.105.1.1.1.11
+      type: counter
+      help: This counter is incremented when the PSE state diagram enters the state
+        SIGNATURE_INVALID. - 1.3.6.1.2.1.105.1.1.1.11
+      indexes:
+      - labelname: pethPsePortGroupIndex
+        type: gauge
+      - labelname: pethPsePortIndex
+        type: gauge
+    - name: pethPsePortPowerDeniedCounter
+      oid: 1.3.6.1.2.1.105.1.1.1.12
+      type: counter
+      help: This counter is incremented when the PSE state diagram enters the state
+        POWER_DENIED. - 1.3.6.1.2.1.105.1.1.1.12
+      indexes:
+      - labelname: pethPsePortGroupIndex
+        type: gauge
+      - labelname: pethPsePortIndex
+        type: gauge
+    - name: pethPsePortOverLoadCounter
+      oid: 1.3.6.1.2.1.105.1.1.1.13
+      type: counter
+      help: This counter is incremented when the PSE state diagram enters the state
+        ERROR_DELAY_OVER. - 1.3.6.1.2.1.105.1.1.1.13
+      indexes:
+      - labelname: pethPsePortGroupIndex
+        type: gauge
+      - labelname: pethPsePortIndex
+        type: gauge
+    - name: pethPsePortShortCounter
+      oid: 1.3.6.1.2.1.105.1.1.1.14
+      type: counter
+      help: This counter is incremented when the PSE state diagram enters the state
+        ERROR_DELAY_SHORT. - 1.3.6.1.2.1.105.1.1.1.14
+      indexes:
+      - labelname: pethPsePortGroupIndex
+        type: gauge
+      - labelname: pethPsePortIndex
+        type: gauge
+    - name: pethMainPseGroupIndex
+      oid: 1.3.6.1.2.1.105.1.3.1.1.1
+      type: gauge
+      help: This variable uniquely identifies the group to which power Ethernet PSE
+        is connected - 1.3.6.1.2.1.105.1.3.1.1.1
+      indexes:
+      - labelname: pethMainPseGroupIndex
+        type: gauge
+    - name: pethMainPsePower
+      oid: 1.3.6.1.2.1.105.1.3.1.1.2
+      type: gauge
+      help: The nominal power of the PSE expressed in Watts. - 1.3.6.1.2.1.105.1.3.1.1.2
+      indexes:
+      - labelname: pethMainPseGroupIndex
+        type: gauge
+    - name: pethMainPseOperStatus
+      oid: 1.3.6.1.2.1.105.1.3.1.1.3
+      type: gauge
+      help: The operational status of the main PSE. - 1.3.6.1.2.1.105.1.3.1.1.3
+      indexes:
+      - labelname: pethMainPseGroupIndex
+        type: gauge
+      enum_values:
+        1: "on"
+        2: "off"
+        3: faulty
+    - name: pethMainPseConsumptionPower
+      oid: 1.3.6.1.2.1.105.1.3.1.1.4
+      type: gauge
+      help: Measured usage power expressed in Watts. - 1.3.6.1.2.1.105.1.3.1.1.4
+      indexes:
+      - labelname: pethMainPseGroupIndex
+        type: gauge
+    - name: pethMainPseUsageThreshold
+      oid: 1.3.6.1.2.1.105.1.3.1.1.5
+      type: gauge
+      help: The usage threshold expressed in percents for comparing the measured power
+        and initiating an alarm if the threshold is exceeded. - 1.3.6.1.2.1.105.1.3.1.1.5
+      indexes:
+      - labelname: pethMainPseGroupIndex
+        type: gauge
+    - name: pethNotificationControlGroupIndex
+      oid: 1.3.6.1.2.1.105.1.4.1.1.1
+      type: gauge
+      help: This variable uniquely identifies the group - 1.3.6.1.2.1.105.1.4.1.1.1
+      indexes:
+      - labelname: pethNotificationControlGroupIndex
+        type: gauge
+    - name: pethNotificationControlEnable
+      oid: 1.3.6.1.2.1.105.1.4.1.1.2
+      type: gauge
+      help: This object controls, on a per-group basis, whether or not notifications
+        from the agent are enabled - 1.3.6.1.2.1.105.1.4.1.1.2
+      indexes:
+      - labelname: pethNotificationControlGroupIndex
+        type: gauge
+      enum_values:
+        1: "true"
+        2: "false"
+  midgar_sw_qbridge:
+    walk:
+    - 1.3.6.1.2.1.17.7
+    metrics:
+    - name: dot1qVlanVersionNumber
+      oid: 1.3.6.1.2.1.17.7.1.1.1
+      type: gauge
+      help: The version number of IEEE 802.1Q that this device supports. - 1.3.6.1.2.1.17.7.1.1.1
+      enum_values:
+        1: version1
+    - name: dot1qMaxVlanId
+      oid: 1.3.6.1.2.1.17.7.1.1.2
+      type: gauge
+      help: The maximum IEEE 802.1Q VLAN-ID that this device supports. - 1.3.6.1.2.1.17.7.1.1.2
+    - name: dot1qMaxSupportedVlans
+      oid: 1.3.6.1.2.1.17.7.1.1.3
+      type: gauge
+      help: The maximum number of IEEE 802.1Q VLANs that this device supports. - 1.3.6.1.2.1.17.7.1.1.3
+    - name: dot1qNumVlans
+      oid: 1.3.6.1.2.1.17.7.1.1.4
+      type: gauge
+      help: The current number of IEEE 802.1Q VLANs that are configured in this device.
+        - 1.3.6.1.2.1.17.7.1.1.4
+    - name: dot1qGvrpStatus
+      oid: 1.3.6.1.2.1.17.7.1.1.5
+      type: gauge
+      help: The administrative status requested by management for GVRP - 1.3.6.1.2.1.17.7.1.1.5
+      enum_values:
+        1: enabled
+        2: disabled
+    - name: dot1qFdbId
+      oid: 1.3.6.1.2.1.17.7.1.2.1.1.1
+      type: gauge
+      help: The identity of this Filtering Database. - 1.3.6.1.2.1.17.7.1.2.1.1.1
+      indexes:
+      - labelname: dot1qFdbId
+        type: gauge
+    - name: dot1qFdbDynamicCount
+      oid: 1.3.6.1.2.1.17.7.1.2.1.1.2
+      type: counter
+      help: The current number of dynamic entries in this Filtering Database. - 1.3.6.1.2.1.17.7.1.2.1.1.2
+      indexes:
+      - labelname: dot1qFdbId
+        type: gauge
+    - name: dot1qTpFdbAddress
+      oid: 1.3.6.1.2.1.17.7.1.2.2.1.1
+      type: PhysAddress48
+      help: A unicast MAC address for which the device has forwarding and/or filtering
+        information. - 1.3.6.1.2.1.17.7.1.2.2.1.1
+      indexes:
+      - labelname: dot1qFdbId
+        type: gauge
+      - labelname: dot1qTpFdbAddress
+        type: PhysAddress48
+        fixed_size: 6
+    - name: dot1qTpFdbPort
+      oid: 1.3.6.1.2.1.17.7.1.2.2.1.2
+      type: gauge
+      help: Either the value '0', or the port number of the port on which a frame
+        having a source address equal to the value of the corresponding instance of
+        dot1qTpFdbAddress has been seen - 1.3.6.1.2.1.17.7.1.2.2.1.2
+      indexes:
+      - labelname: dot1qFdbId
+        type: gauge
+      - labelname: dot1qTpFdbAddress
+        type: PhysAddress48
+        fixed_size: 6
+    - name: dot1qTpFdbStatus
+      oid: 1.3.6.1.2.1.17.7.1.2.2.1.3
+      type: gauge
+      help: The status of this entry - 1.3.6.1.2.1.17.7.1.2.2.1.3
+      indexes:
+      - labelname: dot1qFdbId
+        type: gauge
+      - labelname: dot1qTpFdbAddress
+        type: PhysAddress48
+        fixed_size: 6
+      enum_values:
+        1: other
+        2: invalid
+        3: learned
+        4: self
+        5: mgmt
+    - name: dot1qTpGroupAddress
+      oid: 1.3.6.1.2.1.17.7.1.2.3.1.1
+      type: PhysAddress48
+      help: The destination Group MAC address in a frame to which this entry's filtering
+        information applies. - 1.3.6.1.2.1.17.7.1.2.3.1.1
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+      - labelname: dot1qTpGroupAddress
+        type: PhysAddress48
+        fixed_size: 6
+    - name: dot1qTpGroupEgressPorts
+      oid: 1.3.6.1.2.1.17.7.1.2.3.1.2
+      type: OctetString
+      help: The complete set of ports, in this VLAN, to which frames destined for
+        this Group MAC address are currently being explicitly forwarded - 1.3.6.1.2.1.17.7.1.2.3.1.2
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+      - labelname: dot1qTpGroupAddress
+        type: PhysAddress48
+        fixed_size: 6
+    - name: dot1qTpGroupLearnt
+      oid: 1.3.6.1.2.1.17.7.1.2.3.1.3
+      type: OctetString
+      help: The subset of ports in dot1qTpGroupEgressPorts that were learned by GMRP
+        or some other dynamic mechanism, in this Filtering database. - 1.3.6.1.2.1.17.7.1.2.3.1.3
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+      - labelname: dot1qTpGroupAddress
+        type: PhysAddress48
+        fixed_size: 6
+    - name: dot1qForwardAllPorts
+      oid: 1.3.6.1.2.1.17.7.1.2.4.1.1
+      type: OctetString
+      help: The complete set of ports in this VLAN to which all multicast group-addressed
+        frames are to be forwarded - 1.3.6.1.2.1.17.7.1.2.4.1.1
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qForwardAllStaticPorts
+      oid: 1.3.6.1.2.1.17.7.1.2.4.1.2
+      type: OctetString
+      help: The set of ports configured by management in this VLAN to which all multicast
+        group-addressed frames are to be forwarded - 1.3.6.1.2.1.17.7.1.2.4.1.2
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qForwardAllForbiddenPorts
+      oid: 1.3.6.1.2.1.17.7.1.2.4.1.3
+      type: OctetString
+      help: The set of ports configured by management in this VLAN for which the Service
+        Requirement attribute Forward All Multicast Groups may not be dynamically
+        registered by GMRP - 1.3.6.1.2.1.17.7.1.2.4.1.3
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qForwardUnregisteredPorts
+      oid: 1.3.6.1.2.1.17.7.1.2.5.1.1
+      type: OctetString
+      help: The complete set of ports in this VLAN to which multicast group-addressed
+        frames for which there is no more specific forwarding information will be
+        forwarded - 1.3.6.1.2.1.17.7.1.2.5.1.1
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qForwardUnregisteredStaticPorts
+      oid: 1.3.6.1.2.1.17.7.1.2.5.1.2
+      type: OctetString
+      help: The set of ports configured by management, in this VLAN, to which multicast
+        group-addressed frames for which there is no more specific forwarding information
+        are to be forwarded - 1.3.6.1.2.1.17.7.1.2.5.1.2
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qForwardUnregisteredForbiddenPorts
+      oid: 1.3.6.1.2.1.17.7.1.2.5.1.3
+      type: OctetString
+      help: The set of ports configured by management in this VLAN for which the Service
+        Requirement attribute Forward Unregistered Multicast Groups may not be dynamically
+        registered by GMRP - 1.3.6.1.2.1.17.7.1.2.5.1.3
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qStaticUnicastAddress
+      oid: 1.3.6.1.2.1.17.7.1.3.1.1.1
+      type: PhysAddress48
+      help: The destination MAC address in a frame to which this entry's filtering
+        information applies - 1.3.6.1.2.1.17.7.1.3.1.1.1
+      indexes:
+      - labelname: dot1qFdbId
+        type: gauge
+      - labelname: dot1qStaticUnicastAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1qStaticUnicastReceivePort
+        type: gauge
+    - name: dot1qStaticUnicastReceivePort
+      oid: 1.3.6.1.2.1.17.7.1.3.1.1.2
+      type: gauge
+      help: Either the value '0' or the port number of the port from which a frame
+        must be received in order for this entry's filtering information to apply
+        - 1.3.6.1.2.1.17.7.1.3.1.1.2
+      indexes:
+      - labelname: dot1qFdbId
+        type: gauge
+      - labelname: dot1qStaticUnicastAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1qStaticUnicastReceivePort
+        type: gauge
+    - name: dot1qStaticUnicastAllowedToGoTo
+      oid: 1.3.6.1.2.1.17.7.1.3.1.1.3
+      type: OctetString
+      help: The set of ports for which a frame with a specific unicast address will
+        be flooded in the event that it has not been learned - 1.3.6.1.2.1.17.7.1.3.1.1.3
+      indexes:
+      - labelname: dot1qFdbId
+        type: gauge
+      - labelname: dot1qStaticUnicastAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1qStaticUnicastReceivePort
+        type: gauge
+    - name: dot1qStaticUnicastStatus
+      oid: 1.3.6.1.2.1.17.7.1.3.1.1.4
+      type: gauge
+      help: This object indicates the status of this entry - 1.3.6.1.2.1.17.7.1.3.1.1.4
+      indexes:
+      - labelname: dot1qFdbId
+        type: gauge
+      - labelname: dot1qStaticUnicastAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1qStaticUnicastReceivePort
+        type: gauge
+      enum_values:
+        1: other
+        2: invalid
+        3: permanent
+        4: deleteOnReset
+        5: deleteOnTimeout
+    - name: dot1qStaticMulticastAddress
+      oid: 1.3.6.1.2.1.17.7.1.3.2.1.1
+      type: PhysAddress48
+      help: The destination MAC address in a frame to which this entry's filtering
+        information applies - 1.3.6.1.2.1.17.7.1.3.2.1.1
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+      - labelname: dot1qStaticMulticastAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1qStaticMulticastReceivePort
+        type: gauge
+    - name: dot1qStaticMulticastReceivePort
+      oid: 1.3.6.1.2.1.17.7.1.3.2.1.2
+      type: gauge
+      help: Either the value '0' or the port number of the port from which a frame
+        must be received in order for this entry's filtering information to apply
+        - 1.3.6.1.2.1.17.7.1.3.2.1.2
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+      - labelname: dot1qStaticMulticastAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1qStaticMulticastReceivePort
+        type: gauge
+    - name: dot1qStaticMulticastStaticEgressPorts
+      oid: 1.3.6.1.2.1.17.7.1.3.2.1.3
+      type: OctetString
+      help: The set of ports to which frames received from a specific port and destined
+        for a specific Multicast or Broadcast MAC address must be forwarded, regardless
+        of any dynamic information, e.g., from GMRP - 1.3.6.1.2.1.17.7.1.3.2.1.3
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+      - labelname: dot1qStaticMulticastAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1qStaticMulticastReceivePort
+        type: gauge
+    - name: dot1qStaticMulticastForbiddenEgressPorts
+      oid: 1.3.6.1.2.1.17.7.1.3.2.1.4
+      type: OctetString
+      help: The set of ports to which frames received from a specific port and destined
+        for a specific Multicast or Broadcast MAC address must not be forwarded, regardless
+        of any dynamic information, e.g., from GMRP - 1.3.6.1.2.1.17.7.1.3.2.1.4
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+      - labelname: dot1qStaticMulticastAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1qStaticMulticastReceivePort
+        type: gauge
+    - name: dot1qStaticMulticastStatus
+      oid: 1.3.6.1.2.1.17.7.1.3.2.1.5
+      type: gauge
+      help: This object indicates the status of this entry - 1.3.6.1.2.1.17.7.1.3.2.1.5
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+      - labelname: dot1qStaticMulticastAddress
+        type: PhysAddress48
+        fixed_size: 6
+      - labelname: dot1qStaticMulticastReceivePort
+        type: gauge
+      enum_values:
+        1: other
+        2: invalid
+        3: permanent
+        4: deleteOnReset
+        5: deleteOnTimeout
+    - name: dot1qVlanNumDeletes
+      oid: 1.3.6.1.2.1.17.7.1.4.1
+      type: counter
+      help: The number of times a VLAN entry has been deleted from the dot1qVlanCurrentTable
+        (for any reason) - 1.3.6.1.2.1.17.7.1.4.1
+    - name: dot1qVlanTimeMark
+      oid: 1.3.6.1.2.1.17.7.1.4.2.1.1
+      type: gauge
+      help: A TimeFilter for this entry - 1.3.6.1.2.1.17.7.1.4.2.1.1
+      indexes:
+      - labelname: dot1qVlanTimeMark
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanIndex
+      oid: 1.3.6.1.2.1.17.7.1.4.2.1.2
+      type: gauge
+      help: The VLAN-ID or other identifier referring to this VLAN. - 1.3.6.1.2.1.17.7.1.4.2.1.2
+      indexes:
+      - labelname: dot1qVlanTimeMark
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanFdbId
+      oid: 1.3.6.1.2.1.17.7.1.4.2.1.3
+      type: gauge
+      help: The Filtering Database used by this VLAN - 1.3.6.1.2.1.17.7.1.4.2.1.3
+      indexes:
+      - labelname: dot1qVlanTimeMark
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanCurrentEgressPorts
+      oid: 1.3.6.1.2.1.17.7.1.4.2.1.4
+      type: OctetString
+      help: The set of ports that are transmitting traffic for this VLAN as either
+        tagged or untagged frames. - 1.3.6.1.2.1.17.7.1.4.2.1.4
+      indexes:
+      - labelname: dot1qVlanTimeMark
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanCurrentUntaggedPorts
+      oid: 1.3.6.1.2.1.17.7.1.4.2.1.5
+      type: OctetString
+      help: The set of ports that are transmitting traffic for this VLAN as untagged
+        frames. - 1.3.6.1.2.1.17.7.1.4.2.1.5
+      indexes:
+      - labelname: dot1qVlanTimeMark
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanStatus
+      oid: 1.3.6.1.2.1.17.7.1.4.2.1.6
+      type: gauge
+      help: This object indicates the status of this entry - 1.3.6.1.2.1.17.7.1.4.2.1.6
+      indexes:
+      - labelname: dot1qVlanTimeMark
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+      enum_values:
+        1: other
+        2: permanent
+        3: dynamicGvrp
+    - name: dot1qVlanCreationTime
+      oid: 1.3.6.1.2.1.17.7.1.4.2.1.7
+      type: gauge
+      help: The value of sysUpTime when this VLAN was created. - 1.3.6.1.2.1.17.7.1.4.2.1.7
+      indexes:
+      - labelname: dot1qVlanTimeMark
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanStaticName
+      oid: 1.3.6.1.2.1.17.7.1.4.3.1.1
+      type: DisplayString
+      help: An administratively assigned string, which may be used to identify the
+        VLAN. - 1.3.6.1.2.1.17.7.1.4.3.1.1
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanStaticEgressPorts
+      oid: 1.3.6.1.2.1.17.7.1.4.3.1.2
+      type: OctetString
+      help: The set of ports that are permanently assigned to the egress list for
+        this VLAN by management - 1.3.6.1.2.1.17.7.1.4.3.1.2
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanForbiddenEgressPorts
+      oid: 1.3.6.1.2.1.17.7.1.4.3.1.3
+      type: OctetString
+      help: The set of ports that are prohibited by management from being included
+        in the egress list for this VLAN - 1.3.6.1.2.1.17.7.1.4.3.1.3
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanStaticUntaggedPorts
+      oid: 1.3.6.1.2.1.17.7.1.4.3.1.4
+      type: OctetString
+      help: The set of ports that should transmit egress packets for this VLAN as
+        untagged - 1.3.6.1.2.1.17.7.1.4.3.1.4
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qVlanStaticRowStatus
+      oid: 1.3.6.1.2.1.17.7.1.4.3.1.5
+      type: gauge
+      help: This object indicates the status of this entry. - 1.3.6.1.2.1.17.7.1.4.3.1.5
+      indexes:
+      - labelname: dot1qVlanIndex
+        type: gauge
+      enum_values:
+        1: active
+        2: notInService
+        3: notReady
+        4: createAndGo
+        5: createAndWait
+        6: destroy
+    - name: dot1qNextFreeLocalVlanIndex
+      oid: 1.3.6.1.2.1.17.7.1.4.4
+      type: gauge
+      help: The next available value for dot1qVlanIndex of a local VLAN entry in dot1qVlanStaticTable
+        - 1.3.6.1.2.1.17.7.1.4.4
+    - name: dot1qPvid
+      oid: 1.3.6.1.2.1.17.7.1.4.5.1.1
+      type: gauge
+      help: The PVID, the VLAN-ID assigned to untagged frames or Priority-Tagged frames
+        received on this port - 1.3.6.1.2.1.17.7.1.4.5.1.1
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+    - name: dot1qPortAcceptableFrameTypes
+      oid: 1.3.6.1.2.1.17.7.1.4.5.1.2
+      type: gauge
+      help: When this is admitOnlyVlanTagged(2), the device will discard untagged
+        frames or Priority-Tagged frames received on this port - 1.3.6.1.2.1.17.7.1.4.5.1.2
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      enum_values:
+        1: admitAll
+        2: admitOnlyVlanTagged
+    - name: dot1qPortIngressFiltering
+      oid: 1.3.6.1.2.1.17.7.1.4.5.1.3
+      type: gauge
+      help: When this is true(1), the device will discard incoming frames for VLANs
+        that do not include this Port in its Member set - 1.3.6.1.2.1.17.7.1.4.5.1.3
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      enum_values:
+        1: "true"
+        2: "false"
+    - name: dot1qPortGvrpStatus
+      oid: 1.3.6.1.2.1.17.7.1.4.5.1.4
+      type: gauge
+      help: The state of GVRP operation on this port - 1.3.6.1.2.1.17.7.1.4.5.1.4
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      enum_values:
+        1: enabled
+        2: disabled
+    - name: dot1qPortGvrpFailedRegistrations
+      oid: 1.3.6.1.2.1.17.7.1.4.5.1.5
+      type: counter
+      help: The total number of failed GVRP registrations, for any reason, on this
+        port. - 1.3.6.1.2.1.17.7.1.4.5.1.5
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+    - name: dot1qPortGvrpLastPduOrigin
+      oid: 1.3.6.1.2.1.17.7.1.4.5.1.6
+      type: PhysAddress48
+      help: The Source MAC Address of the last GVRP message received on this port.
+        - 1.3.6.1.2.1.17.7.1.4.5.1.6
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+    - name: dot1qPortRestrictedVlanRegistration
+      oid: 1.3.6.1.2.1.17.7.1.4.5.1.7
+      type: gauge
+      help: The state of Restricted VLAN Registration on this port - 1.3.6.1.2.1.17.7.1.4.5.1.7
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      enum_values:
+        1: "true"
+        2: "false"
+    - name: dot1qTpVlanPortInFrames
+      oid: 1.3.6.1.2.1.17.7.1.4.6.1.1
+      type: counter
+      help: The number of valid frames received by this port from its segment that
+        were classified as belonging to this VLAN - 1.3.6.1.2.1.17.7.1.4.6.1.1
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qTpVlanPortOutFrames
+      oid: 1.3.6.1.2.1.17.7.1.4.6.1.2
+      type: counter
+      help: The number of valid frames transmitted by this port to its segment from
+        the local forwarding process for this VLAN - 1.3.6.1.2.1.17.7.1.4.6.1.2
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qTpVlanPortInDiscards
+      oid: 1.3.6.1.2.1.17.7.1.4.6.1.3
+      type: counter
+      help: The number of valid frames received by this port from its segment that
+        were classified as belonging to this VLAN and that were discarded due to VLAN-related
+        reasons - 1.3.6.1.2.1.17.7.1.4.6.1.3
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qTpVlanPortInOverflowFrames
+      oid: 1.3.6.1.2.1.17.7.1.4.6.1.4
+      type: counter
+      help: The number of times the associated dot1qTpVlanPortInFrames counter has
+        overflowed. - 1.3.6.1.2.1.17.7.1.4.6.1.4
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qTpVlanPortOutOverflowFrames
+      oid: 1.3.6.1.2.1.17.7.1.4.6.1.5
+      type: counter
+      help: The number of times the associated dot1qTpVlanPortOutFrames counter has
+        overflowed. - 1.3.6.1.2.1.17.7.1.4.6.1.5
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qTpVlanPortInOverflowDiscards
+      oid: 1.3.6.1.2.1.17.7.1.4.6.1.6
+      type: counter
+      help: The number of times the associated dot1qTpVlanPortInDiscards counter has
+        overflowed. - 1.3.6.1.2.1.17.7.1.4.6.1.6
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qTpVlanPortHCInFrames
+      oid: 1.3.6.1.2.1.17.7.1.4.7.1.1
+      type: counter
+      help: The number of valid frames received by this port from its segment that
+        were classified as belonging to this VLAN - 1.3.6.1.2.1.17.7.1.4.7.1.1
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qTpVlanPortHCOutFrames
+      oid: 1.3.6.1.2.1.17.7.1.4.7.1.2
+      type: counter
+      help: The number of valid frames transmitted by this port to its segment from
+        the local forwarding process for this VLAN - 1.3.6.1.2.1.17.7.1.4.7.1.2
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qTpVlanPortHCInDiscards
+      oid: 1.3.6.1.2.1.17.7.1.4.7.1.3
+      type: counter
+      help: The number of valid frames received by this port from its segment that
+        were classified as belonging to this VLAN and that were discarded due to VLAN-related
+        reasons - 1.3.6.1.2.1.17.7.1.4.7.1.3
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1qVlanIndex
+        type: gauge
+    - name: dot1qConstraintVlan
+      oid: 1.3.6.1.2.1.17.7.1.4.8.1.1
+      type: gauge
+      help: The index of the row in dot1qVlanCurrentTable for the VLAN constrained
+        by this entry. - 1.3.6.1.2.1.17.7.1.4.8.1.1
+      indexes:
+      - labelname: dot1qConstraintVlan
+        type: gauge
+      - labelname: dot1qConstraintSet
+        type: gauge
+    - name: dot1qConstraintSet
+      oid: 1.3.6.1.2.1.17.7.1.4.8.1.2
+      type: gauge
+      help: The identity of the constraint set to which dot1qConstraintVlan belongs
+        - 1.3.6.1.2.1.17.7.1.4.8.1.2
+      indexes:
+      - labelname: dot1qConstraintVlan
+        type: gauge
+      - labelname: dot1qConstraintSet
+        type: gauge
+    - name: dot1qConstraintType
+      oid: 1.3.6.1.2.1.17.7.1.4.8.1.3
+      type: gauge
+      help: The type of constraint this entry defines - 1.3.6.1.2.1.17.7.1.4.8.1.3
+      indexes:
+      - labelname: dot1qConstraintVlan
+        type: gauge
+      - labelname: dot1qConstraintSet
+        type: gauge
+      enum_values:
+        1: independent
+        2: shared
+    - name: dot1qConstraintStatus
+      oid: 1.3.6.1.2.1.17.7.1.4.8.1.4
+      type: gauge
+      help: The status of this entry. - 1.3.6.1.2.1.17.7.1.4.8.1.4
+      indexes:
+      - labelname: dot1qConstraintVlan
+        type: gauge
+      - labelname: dot1qConstraintSet
+        type: gauge
+      enum_values:
+        1: active
+        2: notInService
+        3: notReady
+        4: createAndGo
+        5: createAndWait
+        6: destroy
+    - name: dot1qConstraintSetDefault
+      oid: 1.3.6.1.2.1.17.7.1.4.9
+      type: gauge
+      help: The identity of the constraint set to which a VLAN belongs, if there is
+        not an explicit entry for that VLAN in dot1qLearningConstraintsTable - 1.3.6.1.2.1.17.7.1.4.9
+    - name: dot1qConstraintTypeDefault
+      oid: 1.3.6.1.2.1.17.7.1.4.10
+      type: gauge
+      help: The type of constraint set to which a VLAN belongs, if there is not an
+        explicit entry for that VLAN in dot1qLearningConstraintsTable - 1.3.6.1.2.1.17.7.1.4.10
+      enum_values:
+        1: independent
+        2: shared
+    - name: dot1vProtocolTemplateFrameType
+      oid: 1.3.6.1.2.1.17.7.1.5.1.1.1
+      type: gauge
+      help: The data-link encapsulation format or the 'detagged_frame_type' in a Protocol
+        Template. - 1.3.6.1.2.1.17.7.1.5.1.1.1
+      indexes:
+      - labelname: dot1vProtocolTemplateFrameType
+        type: gauge
+        enum_values:
+          1: ethernet
+          2: rfc1042
+          3: snap8021H
+          4: snapOther
+          5: llcOther
+      - labelname: dot1vProtocolTemplateProtocolValue
+        type: OctetString
+      enum_values:
+        1: ethernet
+        2: rfc1042
+        3: snap8021H
+        4: snapOther
+        5: llcOther
+    - name: dot1vProtocolTemplateProtocolValue
+      oid: 1.3.6.1.2.1.17.7.1.5.1.1.2
+      type: OctetString
+      help: The identification of the protocol above the data-link layer in a Protocol
+        Template - 1.3.6.1.2.1.17.7.1.5.1.1.2
+      indexes:
+      - labelname: dot1vProtocolTemplateFrameType
+        type: gauge
+        enum_values:
+          1: ethernet
+          2: rfc1042
+          3: snap8021H
+          4: snapOther
+          5: llcOther
+      - labelname: dot1vProtocolTemplateProtocolValue
+        type: OctetString
+    - name: dot1vProtocolGroupId
+      oid: 1.3.6.1.2.1.17.7.1.5.1.1.3
+      type: gauge
+      help: Represents a group of protocols that are associated together when assigning
+        a VID to a frame. - 1.3.6.1.2.1.17.7.1.5.1.1.3
+      indexes:
+      - labelname: dot1vProtocolTemplateFrameType
+        type: gauge
+        enum_values:
+          1: ethernet
+          2: rfc1042
+          3: snap8021H
+          4: snapOther
+          5: llcOther
+      - labelname: dot1vProtocolTemplateProtocolValue
+        type: OctetString
+    - name: dot1vProtocolGroupRowStatus
+      oid: 1.3.6.1.2.1.17.7.1.5.1.1.4
+      type: gauge
+      help: This object indicates the status of this entry. - 1.3.6.1.2.1.17.7.1.5.1.1.4
+      indexes:
+      - labelname: dot1vProtocolTemplateFrameType
+        type: gauge
+        enum_values:
+          1: ethernet
+          2: rfc1042
+          3: snap8021H
+          4: snapOther
+          5: llcOther
+      - labelname: dot1vProtocolTemplateProtocolValue
+        type: OctetString
+      enum_values:
+        1: active
+        2: notInService
+        3: notReady
+        4: createAndGo
+        5: createAndWait
+        6: destroy
+    - name: dot1vProtocolPortGroupId
+      oid: 1.3.6.1.2.1.17.7.1.5.2.1.1
+      type: gauge
+      help: Designates a group of protocols in the Protocol Group Database. - 1.3.6.1.2.1.17.7.1.5.2.1.1
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1vProtocolPortGroupId
+        type: gauge
+    - name: dot1vProtocolPortGroupVid
+      oid: 1.3.6.1.2.1.17.7.1.5.2.1.2
+      type: gauge
+      help: The VID associated with a group of protocols for each port. - 1.3.6.1.2.1.17.7.1.5.2.1.2
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1vProtocolPortGroupId
+        type: gauge
+    - name: dot1vProtocolPortRowStatus
+      oid: 1.3.6.1.2.1.17.7.1.5.2.1.3
+      type: gauge
+      help: This object indicates the status of this entry. - 1.3.6.1.2.1.17.7.1.5.2.1.3
+      indexes:
+      - labelname: dot1dBasePort
+        type: gauge
+      - labelname: dot1vProtocolPortGroupId
+        type: gauge
+      enum_values:
+        1: active
+        2: notInService
+        3: notReady
+        4: createAndGo
+        5: createAndWait
+        6: destroy

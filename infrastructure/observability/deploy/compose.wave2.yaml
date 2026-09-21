@@ -1,0 +1,47 @@
+services:
+  loki:
+    image: grafana/loki:3.7.0
+    container_name: observatory-loki
+    restart: unless-stopped
+    user: "10001:10001"
+    command:
+      - -config.file=/etc/loki/loki.yml
+    volumes:
+      - ./config/loki/loki.yml:/etc/loki/loki.yml:ro
+      - ./data/loki:/loki
+    ports:
+      - ${OBSERVATORY_BIND_ADDRESS:-127.0.0.1}:3100:3100
+    mem_limit: 768m
+    cpus: 0.50
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - telemetry
+
+  alloy:
+    image: grafana/alloy:v1.19.0
+    container_name: observatory-alloy
+    restart: unless-stopped
+    user: "473:473"
+    group_add:
+      - "${JOURNAL_GROUP_ID:?set JOURNAL_GROUP_ID}"
+    command:
+      - run
+      - --server.http.listen-addr=0.0.0.0:12345
+      - --storage.path=/var/lib/alloy/data
+      - /etc/alloy/config.alloy
+    volumes:
+      - ./config/alloy/config.alloy:/etc/alloy/config.alloy:ro
+      - ./data/alloy:/var/lib/alloy/data
+      - /var/log/journal:/var/log/journal:ro
+      - /etc/machine-id:/etc/machine-id:ro
+    ports:
+      - 127.0.0.1:12345:12345
+    mem_limit: 256m
+    cpus: 0.25
+    security_opt:
+      - no-new-privileges:true
+    depends_on:
+      - loki
+    networks:
+      - telemetry
